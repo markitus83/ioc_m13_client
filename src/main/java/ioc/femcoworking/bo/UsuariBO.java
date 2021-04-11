@@ -36,7 +36,7 @@ public class UsuariBO {
     public Response login(DadesAccesVO dadesAcces) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(dadesAcces);
-        
+        System.out.println("login :: requestBody >>"+requestBody);
         Request request = new Request.Builder()
             .url(URL_SERVIDOR + "/login")
             .header("Content-Type","application/json; charset=utf-8")
@@ -89,7 +89,7 @@ public class UsuariBO {
         
         Response response = httpClient.newCall(request).execute();
         
-       return response;
+        return response;
     }
     
     /**
@@ -102,26 +102,6 @@ public class UsuariBO {
      * @throws IOException 
      */
     public Response llistatUsuaris(CodiAccesVO codiAcces) throws IOException {
-        Request request = new Request.Builder()
-            .url(URL_SERVIDOR + "/usuaris/" + codiAcces.getCodiAcces())
-            .header("Content-Type","application/json; charset=utf-8")
-            .build();
-        
-        Response response = httpClient.newCall(request).execute();
-        
-        return response;
-    }
-    
-    /**
-     * Obtenir un llistat de les oficines registrats en el sistema
-     * 
-     * Petició GET al servidor
-     * 
-     * @param codiAcces
-     * @return Response
-     * @throws IOException 
-     */
-    public Response llistatOficines(CodiAccesVO codiAcces) throws IOException {
         Request request = new Request.Builder()
             .url(URL_SERVIDOR + "/usuaris/" + codiAcces.getCodiAcces())
             .header("Content-Type","application/json; charset=utf-8")
@@ -153,7 +133,7 @@ public class UsuariBO {
         
         Response response = httpClient.newCall(request).execute();
         
-       return response; 
+        return response; 
     }
     
     /**
@@ -164,28 +144,6 @@ public class UsuariBO {
      * @throws IOException 
      */
     public Response registrarNouUsuari(UsuariVO nouUsuari) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String requestBody = objectMapper.writeValueAsString(nouUsuari);
-        
-        Request request = new Request.Builder()
-            .url(URL_SERVIDOR + "/registre")
-            .header("Content-Type","application/json; charset=utf-8")
-            .post(RequestBody.create(requestBody, JSON))
-            .build();
-        
-        Response response = httpClient.newCall(request).execute();
-        
-        return response;
-    }
-    
-    /**
-     * Registrar nova oficina en el sistema
-     * 
-     * @param nouUsuari
-     * @return Response
-     * @throws IOException 
-     */
-    public Response registrarNovaOficina(UsuariVO nouUsuari) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(nouUsuari);
         

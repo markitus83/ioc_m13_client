@@ -23,8 +23,7 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
     private static String codiAcces;
     
     public LlistatUsuarisView(String codi) {
-        codiAcces = codi;
-        initComponents();        
+        codiAcces = codi;       
         carregarLlistatUsuaris(codiAcces);
     }
     
@@ -170,9 +169,10 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
             
             if (200 != response.getInt("code")) {
                 System.out.println(response.getString("message"));
-                new SimpleDialog().errorMessage(response.getString("message"));
+                JSONObject jsonResponse = new JSONObject(response.getString("message"));
+                new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
             } else {
-                
+                initComponents();
                 List<UsuariVO> llistatUsuaris = new ObjectMapper().readValue(
                     response.getString("message"), 
                     new TypeReference<List<UsuariVO>>() {}

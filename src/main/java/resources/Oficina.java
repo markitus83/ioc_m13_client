@@ -6,7 +6,7 @@ package resources;
  * 
  * @author Marc Ginovart Vega
  */
-public enum Sala {
+public enum Oficina {
     INDIVIDUAL("INDIVIDUAL", 0),
     COMPARTIDA("COMPARTIDA", 1),
     REUNIONS("REUNIONS", 2),
@@ -15,24 +15,24 @@ public enum Sala {
     private final String salaNom;
     private final int salaValor;
 
-    private Sala(String salaNom, int salaValor) {
+    private Oficina(String salaNom, int salaValor) {
         this.salaNom = salaNom;
         this.salaValor = salaValor;
     }
 
-    public static Sala getINDIVIDUAL() {
+    public static Oficina getINDIVIDUAL() {
         return INDIVIDUAL;
     }
 
-    public static Sala getCOMPARTIDA() {
+    public static Oficina getCOMPARTIDA() {
         return COMPARTIDA;
     }
 
-    public static Sala getREUNIONS() {
+    public static Oficina getREUNIONS() {
         return REUNIONS;
     }
 
-    public static Sala getCONJUNTA() {
+    public static Oficina getCONJUNTA() {
         return CONJUNTA;
     }
 

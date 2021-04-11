@@ -189,7 +189,8 @@ public class InformacioOficinaView extends javax.swing.JFrame {
             JSONObject response = usuari.canviarEstatUsuari(codiAcces, idUsuari);
             
             if (200 != response.getInt("code")) {
-                new SimpleDialog().errorMessage(response.getString("message"));
+                JSONObject jsonResponse = new JSONObject(response.getString("message"));
+                new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
             } else {
                 new SimpleDialog().infoMessage(response.getString("message"));
                 this.dispose();

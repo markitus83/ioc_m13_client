@@ -174,7 +174,8 @@ public class LlistatOficinesView extends javax.swing.JFrame {
             
             if (200 != response.getInt("code")) {
                 System.out.println(response.getString("message"));
-                new SimpleDialog().errorMessage(response.getString("message"));
+                JSONObject jsonResponse = new JSONObject(response.getString("message"));
+                new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
             } else {
                 
                 List<UsuariVO> llistatUsuaris = new ObjectMapper().readValue(

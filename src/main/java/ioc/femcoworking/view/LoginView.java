@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
+import resources.Rol;
 import resources.SimpleDialog;
 
 /**
@@ -35,8 +36,6 @@ public class LoginView extends javax.swing.JFrame {
         lblUsuari = new javax.swing.JLabel();
         lblContrasenya = new javax.swing.JLabel();
         btnEntrar = new javax.swing.JButton();
-        lblAdministrador = new javax.swing.JLabel();
-        chkAdministrador = new javax.swing.JCheckBox();
         lblRegistrarUsuari = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,8 +51,6 @@ public class LoginView extends javax.swing.JFrame {
                 btnEntrarActionPerformed(evt);
             }
         });
-
-        lblAdministrador.setText("Administrador?");
 
         lblRegistrarUsuari.setText("Registrar nou usuari");
         lblRegistrarUsuari.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -71,14 +68,11 @@ public class LoginView extends javax.swing.JFrame {
                 .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblUsuari)
-                    .addComponent(lblContrasenya)
-                    .addComponent(lblAdministrador))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(inputContrasenya)
-                        .addComponent(inputUsuari, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
-                    .addComponent(chkAdministrador))
+                    .addComponent(lblContrasenya))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(inputContrasenya)
+                    .addComponent(inputUsuari, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
                 .addGap(72, 72, 72))
             .addGroup(layout.createSequentialGroup()
                 .addGap(106, 106, 106)
@@ -98,14 +92,7 @@ public class LoginView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputContrasenya, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblContrasenya))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(lblAdministrador))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chkAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEntrar)
                     .addComponent(lblRegistrarUsuari))
@@ -128,9 +115,15 @@ public class LoginView extends javax.swing.JFrame {
                 new SimpleDialog().errorMessage(response.getString("message"));
             } else {
                 new SimpleDialog().infoMessage("Accés correcte");
+                new SimpleDialog().infoMessage(response.getString("message"));
+                JSONObject jsonResponse = new JSONObject(response.getString("message"));
                 
-                if (chkAdministrador.isSelected()) {                    
-                    new IniciAdministradorView(response.getString("message")).setVisible(true);
+                String codiAcces = jsonResponse.get("codiAcces").toString();
+                String rolUser = jsonResponse.get("rolUsuari").toString();
+                String rolAdmin = Rol.ADMINISTRADOR.getRolNom().toString();
+                
+                if (rolAdmin.equalsIgnoreCase(rolUser)) {                    
+                    new IniciAdministradorView(codiAcces).setVisible(true);
                 } else {
                     new IniciClientView(response.getString("message")).setVisible(true);
                 }
@@ -187,10 +180,8 @@ public class LoginView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
-    private javax.swing.JCheckBox chkAdministrador;
     private javax.swing.JPasswordField inputContrasenya;
     private javax.swing.JTextField inputUsuari;
-    private javax.swing.JLabel lblAdministrador;
     private javax.swing.JLabel lblContrasenya;
     private javax.swing.JLabel lblRegistrarUsuari;
     private javax.swing.JLabel lblUsuari;

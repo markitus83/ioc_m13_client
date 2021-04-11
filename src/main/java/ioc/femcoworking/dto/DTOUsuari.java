@@ -140,34 +140,6 @@ public class DTOUsuari {
     }
     
     /**
-     * Obtenir llistat d'oficines
-     * 
-     * @param codi
-     * @return JSONObject
-     * @throws IOException 
-     */
-    public JSONObject llistatOficines(String codi) throws IOException {
-        UsuariBO usuari = new UsuariBO();
-        codiAcces = new CodiAccesVO(codi);
-        
-        Response response = usuari.llistatOficines(codiAcces);
-        
-        String responseBody = response.body().string();
-                
-        HashMap<String, Object> jsonResponse = new HashMap<>();
-        jsonResponse.put("code", response.code());
-        
-        if (405 == response.code()) {
-            JSONObject errorMessage = new JSONObject(responseBody);
-            jsonResponse.put("message", errorMessage.get("message"));
-        } else {            
-            jsonResponse.put("message", responseBody);
-        }
-        
-        return new JSONObject(jsonResponse);
-    }
-    
-    /**
      * Canviar estat d'usuari
      * 
      * @param codi
