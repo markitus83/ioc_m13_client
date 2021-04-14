@@ -3,6 +3,7 @@ package ioc.femcoworking.dto;
 import ioc.femcoworking.bo.UsuariBO;
 import ioc.femcoworking.vo.CodiAccesVO;
 import ioc.femcoworking.vo.DadesAccesVO;
+import ioc.femcoworking.vo.PeticioEdicioUsuariVO;
 import ioc.femcoworking.vo.UsuariVO;
 import java.io.IOException;
 import java.util.HashMap;
@@ -193,8 +194,7 @@ public class DTOUsuari {
         String poblacio,
         String provincia,
         Boolean deshabilitat
-    ) 
-    throws IOException {
+    ) throws IOException {
         UsuariBO usuari = new UsuariBO();        
         UsuariVO nouUsuari = new UsuariVO(
             email, 
@@ -225,47 +225,26 @@ public class DTOUsuari {
         return new JSONObject(jsonResponse);
     }
     
-    /**
-     * Registrar nova oficina
-     * 
-     * @param nom
-     * @param contrasenya
-     * @param email
-     * @param rol
-     * @param cif
-     * @param direccio
-     * @param poblacio
-     * @param provincia
-     * @param deshabilitat
-     * @return
-     * @throws IOException 
-     */
-    public JSONObject registrarNovaOficina(
+    public JSONObject editarUsuari(
+        String codi, 
         String nom,
-        String contrasenya,
-        String email,
-        Rol rol,
         String cif,
         String direccio,
         String poblacio,
-        String provincia,
-        Boolean deshabilitat
-    ) 
-    throws IOException {
-        UsuariBO usuari = new UsuariBO();        
-        UsuariVO nouUsuari = new UsuariVO(
-            email, 
-            contrasenya, 
-            rol, 
+        String provincia
+    ) throws IOException {
+        UsuariBO usuari = new UsuariBO();
+        codiAcces = new CodiAccesVO(codi);
+        
+        PeticioEdicioUsuariVO editarUsuari = new PeticioEdicioUsuariVO(
             nom, 
-            cif, 
+    cif, 
             direccio, 
             poblacio, 
-            provincia, 
-            deshabilitat
+            provincia
         );
-    
-        Response response = usuari.registrarNouUsuari(nouUsuari);
+        
+        Response response = usuari.editarUsuari(codiAcces, editarUsuari);
         
         String responseBody = response.body().string();
         
@@ -280,5 +259,5 @@ public class DTOUsuari {
         }
         
         return new JSONObject(jsonResponse);
-    }    
+    }
 }

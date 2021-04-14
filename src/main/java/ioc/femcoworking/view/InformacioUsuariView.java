@@ -52,7 +52,8 @@ public class InformacioUsuariView extends javax.swing.JFrame {
         inputProvincia = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         chkDeshabilitat = new javax.swing.JCheckBox();
-        btnGuardar = new javax.swing.JButton();
+        btnGuardarDeshabilitar = new javax.swing.JButton();
+        btnGuardarEditar = new javax.swing.JButton();
 
         setTitle("FEM_Coworking");
 
@@ -86,10 +87,19 @@ public class InformacioUsuariView extends javax.swing.JFrame {
 
         jLabel8.setText("Deshabilitat");
 
-        btnGuardar.setText("Guardar canvis");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarDeshabilitar.setText("Guardar canvis");
+        btnGuardarDeshabilitar.setToolTipText("btnGuardarDeshabilitar");
+        btnGuardarDeshabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                btnGuardarDeshabilitarActionPerformed(evt);
+            }
+        });
+
+        btnGuardarEditar.setText("Guardar canvis");
+        btnGuardarEditar.setToolTipText("btnGuardarEditar");
+        btnGuardarEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarEditarActionPerformed(evt);
             }
         });
 
@@ -136,7 +146,9 @@ public class InformacioUsuariView extends javax.swing.JFrame {
                                     .addComponent(inputProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(131, 131, 131)
-                        .addComponent(btnGuardar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnGuardarEditar)
+                            .addComponent(btnGuardarDeshabilitar))))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -175,14 +187,16 @@ public class InformacioUsuariView extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(chkDeshabilitat))
                 .addGap(18, 18, 18)
-                .addComponent(btnGuardar)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardarDeshabilitar)
+                    .addComponent(btnGuardarEditar))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnGuardarDeshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarDeshabilitarActionPerformed
         DTOUsuari usuari = new DTOUsuari();
         
         try {
@@ -197,7 +211,37 @@ public class InformacioUsuariView extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnGuardarDeshabilitarActionPerformed
+
+    private void btnGuardarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarEditarActionPerformed
+        DTOUsuari usuari = new DTOUsuari();
+        
+        String nom = inputNom.getText();
+        String cif = inputCifEmpresa.getText();
+        String direccio = inputDireccio.getText();
+        String poblacio = inputPoblacio.getText();
+        String provincia = inputProvincia.getText();
+        
+        try {
+            JSONObject response = usuari.editarUsuari(
+                codiAcces, 
+                nom,
+                cif,
+                direccio,
+                poblacio,
+                provincia
+            );
+            
+            if (200 != response.getInt("code")) {
+                new SimpleDialog().errorMessage(response.getString("message"));
+            } else {
+                new SimpleDialog().infoMessage(response.getString("message"));
+                this.dispose();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardarEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,7 +279,8 @@ public class InformacioUsuariView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnGuardarDeshabilitar;
+    public javax.swing.JButton btnGuardarEditar;
     public javax.swing.JCheckBox chkDeshabilitat;
     public javax.swing.JTextField inputCifEmpresa;
     public javax.swing.JTextField inputDireccio;

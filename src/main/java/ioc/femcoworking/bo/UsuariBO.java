@@ -3,6 +3,7 @@ package ioc.femcoworking.bo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ioc.femcoworking.vo.CodiAccesVO;
 import ioc.femcoworking.vo.DadesAccesVO;
+import ioc.femcoworking.vo.PeticioEdicioUsuariVO;
 import ioc.femcoworking.vo.UsuariVO;
 import java.io.IOException;
 import okhttp3.MediaType;
@@ -36,7 +37,7 @@ public class UsuariBO {
     public Response login(DadesAccesVO dadesAcces) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(dadesAcces);
-        System.out.println("login :: requestBody >>"+requestBody);
+        
         Request request = new Request.Builder()
             .url(URL_SERVIDOR + "/login")
             .header("Content-Type","application/json; charset=utf-8")
@@ -156,5 +157,33 @@ public class UsuariBO {
         Response response = httpClient.newCall(request).execute();
         
         return response;
+    }
+    
+    /**
+     * Editar informació d'un usuari
+     * 
+     * Petició PUT al servidor
+     * 
+     * @param codiAcces
+     * @param idUsuari
+     * @return Response
+     * @throws IOException 
+     */
+    public Response editarUsuari(
+        CodiAccesVO codiAcces, 
+        PeticioEdicioUsuariVO editarUsuari
+    ) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = objectMapper.writeValueAsString(editarUsuari);
+        
+        Request request = new Request.Builder()
+            .url(URL_SERVIDOR + "/editarusuari/" + codiAcces.getCodiAcces())
+            .header("Content-Type","application/json; charset=utf-8")
+            .put(RequestBody.create(requestBody, JSON))
+            .build();
+        
+        Response response = httpClient.newCall(request).execute();
+        
+        return response; 
     }
 }

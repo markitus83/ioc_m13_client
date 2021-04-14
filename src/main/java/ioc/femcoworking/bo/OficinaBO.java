@@ -39,21 +39,18 @@ public class OficinaBO {
      * @return Response
      * @throws IOException 
      */
-    public Response registrarNovaOficina(OficinaVO novaOficina) throws IOException {
+    public Response altaNovaOficina(OficinaVO novaOficina) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(novaOficina);
-        /*
+        
         Request request = new Request.Builder()
-            .url(URL_SERVIDOR + "/registre_oficina")
+            .url(URL_SERVIDOR + "/altaoficina")
             .header("Content-Type","application/json; charset=utf-8")
             .post(RequestBody.create(requestBody, JSON))
             .build();
         
         Response response = httpClient.newCall(request).execute();
         
-        return response;
-        */
-        Response response = null;
         return response;
     }
     

@@ -43,5 +43,19 @@ public class SimpleDialog {
             "FEM Coworking", 
             JOptionPane.QUESTION_MESSAGE
         );
-    }        
+    }
+    
+    public int optionMessage(String missatge) {
+        String[] options = {"Editar usuari", "Deshabilitar usuari"};
+        return JOptionPane.showOptionDialog(
+            null,
+            "Quina acció vols realitzar", 
+            "FEM Coworking", 
+            JOptionPane.DEFAULT_OPTION, 
+            JOptionPane.QUESTION_MESSAGE, 
+            null, 
+            options, 
+            options[0]
+        );
+    }
 }

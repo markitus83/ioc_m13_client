@@ -115,7 +115,6 @@ public class LoginView extends javax.swing.JFrame {
                 new SimpleDialog().errorMessage(response.getString("message"));
             } else {
                 new SimpleDialog().infoMessage("Accés correcte");
-                new SimpleDialog().infoMessage(response.getString("message"));
                 JSONObject jsonResponse = new JSONObject(response.getString("message"));
                 
                 String codiAcces = jsonResponse.get("codiAcces").toString();

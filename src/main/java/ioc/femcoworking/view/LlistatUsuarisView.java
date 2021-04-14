@@ -21,6 +21,8 @@ import resources.SimpleDialog;
  */
 public class LlistatUsuarisView extends javax.swing.JFrame {
     private static String codiAcces;
+    private static final Integer EDITAR_USUARI = 0;
+    private static final Integer DESHABILITAR_USUARI = 1;
     
     public LlistatUsuarisView(String codi) {
         codiAcces = codi;       
@@ -111,7 +113,6 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
         String deshabilitat = model.getValueAt(index, 8).toString();
         
         InformacioUsuariView informacioUsuariView = new InformacioUsuariView(codiAcces, idUsuari);
-        informacioUsuariView.setVisible(true);
         
         informacioUsuariView.inputNom.setText(nom);
         informacioUsuariView.inputEmail.setText(email);
@@ -120,7 +121,20 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
         informacioUsuariView.inputDireccio.setText(direccio);
         informacioUsuariView.inputPoblacio.setText(poblacio);
         informacioUsuariView.inputProvincia.setText(provincia);
-        informacioUsuariView.chkDeshabilitat.setSelected(Boolean.parseBoolean(deshabilitat));        
+        informacioUsuariView.chkDeshabilitat.setSelected(Boolean.parseBoolean(deshabilitat)); 
+        
+        /*
+        Integer accioUsuari= new SimpleDialog().optionMessage("Editar o deshabilitar usuari?");        
+        if (accioUsuari == EDITAR_USUARI) {
+            habilitarCamps(informacioUsuariView);
+        } else if (accioUsuari == DESHABILITAR_USUARI) {
+            deshabilitarCamps(informacioUsuariView);
+        }
+        */
+        informacioUsuariView.btnGuardarEditar.setVisible(false);
+        
+        informacioUsuariView.setVisible(true);
+        
     }//GEN-LAST:event_taulaMouseClicked
 
     /**
@@ -220,6 +234,28 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(LlistatUsuarisView.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void deshabilitarCamps(InformacioUsuariView informacioUsuariView) {
+        informacioUsuariView.inputNom.setEnabled(false);
+        informacioUsuariView.inputCifEmpresa.setEnabled(false);
+        informacioUsuariView.inputDireccio.setEnabled(false);
+        informacioUsuariView.inputPoblacio.setEnabled(false);
+        informacioUsuariView.inputProvincia.setEnabled(false);
+        
+        informacioUsuariView.btnGuardarEditar.setVisible(false);
+        informacioUsuariView.btnGuardarDeshabilitar.setVisible(true);
+    }
+    
+    private void habilitarCamps(InformacioUsuariView informacioUsuariView) {
+        informacioUsuariView.inputNom.setEnabled(true);
+        informacioUsuariView.inputCifEmpresa.setEnabled(true);
+        informacioUsuariView.inputDireccio.setEnabled(true);
+        informacioUsuariView.inputPoblacio.setEnabled(true);
+        informacioUsuariView.inputProvincia.setEnabled(true);
+        
+        informacioUsuariView.btnGuardarEditar.setVisible(true);
+        informacioUsuariView.btnGuardarDeshabilitar.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
