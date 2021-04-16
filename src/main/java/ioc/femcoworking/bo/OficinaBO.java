@@ -4,6 +4,7 @@ package ioc.femcoworking.bo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ioc.femcoworking.vo.CodiAccesVO;
 import ioc.femcoworking.vo.OficinaVO;
+import ioc.femcoworking.vo.OficinaVisualitzacioVO;
 import ioc.femcoworking.vo.PeticioAltaOficinaVO;
 import java.io.IOException;
 import okhttp3.MediaType;
@@ -83,28 +84,22 @@ public class OficinaBO {
      * Petició PUT al servidor
      * 
      * @param codiAcces
-     * @param novaInfoOficina
+     * @param edicioOficina
      * @return Response
      * @throws IOException 
      */
-    public Response editarOficina(CodiAccesVO codiAcces, String novaInfoOficina) throws IOException {
+    public Response editarOficina(String codiAcces, OficinaVisualitzacioVO edicioOficina) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String requestBody = objectMapper.writeValueAsString(novaInfoOficina);
-        
-        /*
-        JSONObject jsonBody = new JSONObject().put("contrasenya", novaContrasenya);
-        
+        String requestBody = objectMapper.writeValueAsString(edicioOficina);
+                
         Request request = new Request.Builder()
-            .url(URL_SERVIDOR + "/editarOficina/" + codiAcces.getCodiAcces())
+            .url(URL_SERVIDOR + "/editaroficina/" + codiAcces)
             .header("Content-Type","application/json; charset=utf-8")
-            .put(RequestBody.create(jsonBody.toString(), JSON))
+            .put(RequestBody.create(requestBody.toString(), JSON))
             .build();
         
         Response response = httpClient.newCall(request).execute();
         
-        return response;
-        */
-        Response response = null;
         return response;
     }
     

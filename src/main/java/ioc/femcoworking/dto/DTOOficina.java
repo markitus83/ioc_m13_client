@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ioc.femcoworking.bo.OficinaBO;
 import ioc.femcoworking.vo.CodiAccesVO;
 import ioc.femcoworking.vo.OficinaVO;
+import ioc.femcoworking.vo.OficinaVisualitzacioVO;
 import ioc.femcoworking.vo.PeticioAltaOficinaVO;
 import java.io.IOException;
 import java.util.HashMap;
@@ -94,6 +95,13 @@ public class DTOOficina {
         return new JSONObject(jsonResponse);
     }
     
+    /**
+     * Obtenir llistat d'Oficines
+     * 
+     * @param codiAcces
+     * @return
+     * @throws IOException 
+     */
     public JSONObject llistatOficines(String codiAcces) throws IOException {
         OficinaBO oficina = new OficinaBO();
         
@@ -114,6 +122,14 @@ public class DTOOficina {
         return new JSONObject(jsonResponse);
     }
     
+    /**
+     * Donar de baixa una oficina
+     * 
+     * @param codiAcces
+     * @param idOficina
+     * @return
+     * @throws IOException 
+     */
     public JSONObject baixaOficina(String codiAcces, String idOficina) throws IOException {
         OficinaBO oficina = new OficinaBO();
         
@@ -121,6 +137,71 @@ public class DTOOficina {
         
         String responseBody = response.body().string();
                 
+        HashMap<String, Object> jsonResponse = new HashMap<>();
+        jsonResponse.put("code", response.code());
+        
+        if (200 != response.code()) {
+            JSONObject errorMessage = new JSONObject(responseBody);
+            jsonResponse.put("message", errorMessage.get("message"));
+        } else {            
+            jsonResponse.put("message", responseBody);
+        }
+        
+        return new JSONObject(jsonResponse);
+    }
+    
+    /**
+     * Editar oficina ja existent
+     * 
+     * @param codiAcces
+     * @param idOficina
+     * @param nom
+     * @param tipus
+     * @param capacitat
+     * @param preu
+     * @param serveis
+     * @param provincia
+     * @param poblacio
+     * @param direccio
+     * @param deshabilitat
+     * @param eliminat
+     * @return
+     * @throws JsonProcessingException
+     * @throws IOException 
+     */
+    public JSONObject editarOficina(
+        String codiAcces,
+        String idOficina,
+        String nom,
+        Categoria tipus,
+        Integer capacitat,
+        Double preu,
+        String serveis,
+        String provincia,
+        String poblacio,
+        String direccio,
+        Boolean deshabilitat,
+        Boolean eliminat
+    ) throws JsonProcessingException, IOException {
+        OficinaBO oficina = new OficinaBO();
+        OficinaVisualitzacioVO edicioOficina = new OficinaVisualitzacioVO(
+            idOficina, 
+            nom, 
+            tipus,
+            capacitat,
+            preu,
+            serveis,
+            deshabilitat,
+            provincia,
+            poblacio,
+            direccio,
+            eliminat
+        );
+                
+        Response response = oficina.editarOficina(codiAcces, edicioOficina);
+        
+        String responseBody = response.body().string();
+        
         HashMap<String, Object> jsonResponse = new HashMap<>();
         jsonResponse.put("code", response.code());
         

@@ -16,11 +16,11 @@ import resources.SimpleDialog;
  */
 public class InformacioOficinaView extends javax.swing.JFrame {
     private static String codiAcces;
-    private static String idUsuari;
+    private static String idOficinaEditada;
     
     public InformacioOficinaView(String codi, String id) {
         codiAcces = codi;
-        idUsuari = id;                   
+        idOficinaEditada = id;                   
         initComponents();
     }
     
@@ -238,8 +238,9 @@ public class InformacioOficinaView extends javax.swing.JFrame {
             Boolean deshabilitat = chkHabilitat.isSelected();
             Boolean eliminat = chkHabilitat.isSelected();
             
-            JSONObject response = oficina.altaOficina(
+            JSONObject response = oficina.editarOficina(
                 codiAcces,
+                idOficinaEditada,
                 nom,
                 categoria,
                 capacitat,

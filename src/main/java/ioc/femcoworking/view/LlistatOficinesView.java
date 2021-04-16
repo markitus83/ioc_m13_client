@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import org.json.JSONObject;
 import java.util.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 import resources.SimpleDialog;
 
@@ -129,16 +131,12 @@ public class LlistatOficinesView extends javax.swing.JFrame {
         
         Integer accioUsuari= new SimpleDialog().optionMessage("Editar o eliminar oficina?", "Editar", "Eliminar");
         if (accioUsuari == EDITAR) {
-            new SimpleDialog().infoMessage("editar");
             informacioOficinaView.setVisible(true);
         } else if (accioUsuari == DESHABILITAR) {
             if (Boolean.parseBoolean(eliminada)) {
                 new SimpleDialog().infoMessage("Oficina ja marcada com eliminada");
             } else {
-                deshabilitarOficina(codiAcces, idOficina);
-                //DefaultTableModel tableModel = (DefaultTableModel) model;
-                //tableModel.fireTableCellUpdated(0, 10);
-                taulaOficines.revalidate();
+                baixaOficina(codiAcces, idOficina);                
             }
         }
     }//GEN-LAST:event_taulaOficinesMouseClicked
@@ -240,6 +238,8 @@ public class LlistatOficinesView extends javax.swing.JFrame {
                 taulaOficines.setModel(model);
                 
                 taulaOficines.getColumnModel().removeColumn(taulaOficines.getColumnModel().getColumn(0));
+                
+                
             }
             
         } catch (IOException ex) {
@@ -247,7 +247,7 @@ public class LlistatOficinesView extends javax.swing.JFrame {
         }
     }
     
-    private void deshabilitarOficina(String codiAcces, String idOficina) {
+    private void baixaOficina(String codiAcces, String idOficina) {
         DTOOficina oficina = new DTOOficina();
         
         try {
