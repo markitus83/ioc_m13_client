@@ -45,11 +45,11 @@ public class SimpleDialog {
         );
     }
     
-    public int optionMessage(String missatge) {
-        String[] options = {"Editar usuari", "Deshabilitar usuari"};
+    public int optionMessage(String missatge, String option0, String option1) {
+        String[] options = {option0, option1};
         return JOptionPane.showOptionDialog(
             null,
-            "Quina acció vols realitzar", 
+            missatge, 
             "FEM Coworking", 
             JOptionPane.DEFAULT_OPTION, 
             JOptionPane.QUESTION_MESSAGE, 

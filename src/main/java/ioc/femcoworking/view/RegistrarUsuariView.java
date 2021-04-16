@@ -18,10 +18,6 @@ public class RegistrarUsuariView extends javax.swing.JFrame {
     
     public RegistrarUsuariView() {
         initComponents();
-        new SimpleDialog().errorMessage("admin "+Rol.ADMINISTRADOR.toString());
-        System.out.println(Rol.ADMINISTRADOR);
-        new SimpleDialog().errorMessage("client "+Rol.CLIENT.toString());
-        System.out.println(Rol.CLIENT);
     }
 
     /**

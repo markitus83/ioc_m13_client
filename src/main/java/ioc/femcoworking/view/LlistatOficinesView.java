@@ -3,8 +3,8 @@ package ioc.femcoworking.view;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ioc.femcoworking.dto.DTOUsuari;
-import ioc.femcoworking.vo.UsuariVO;
+import ioc.femcoworking.dto.DTOOficina;
+import ioc.femcoworking.vo.OficinaVO;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,11 +21,12 @@ import resources.SimpleDialog;
  */
 public class LlistatOficinesView extends javax.swing.JFrame {
     private static String codiAcces;
+    private static final Integer EDITAR = 0;
+    private static final Integer DESHABILITAR = 1;
     
     public LlistatOficinesView(String codi) {
         codiAcces = codi;
-        initComponents();        
-        carregarLlistatUsuaris(codiAcces);
+        carregarLlistatOficines(codiAcces);
     }
     
     public LlistatOficinesView() {
@@ -44,13 +45,13 @@ public class LlistatOficinesView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        taula = new javax.swing.JTable();
+        taulaOficines = new javax.swing.JTable();
 
         setTitle("FEM_Coworking");
 
         jLabel1.setText("Administrador / Llistat Oficines");
 
-        taula.setModel(new javax.swing.table.DefaultTableModel(
+        taulaOficines.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -61,12 +62,12 @@ public class LlistatOficinesView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        taula.addMouseListener(new java.awt.event.MouseAdapter() {
+        taulaOficines.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                taulaMouseClicked(evt);
+                taulaOficinesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(taula);
+        jScrollPane1.setViewportView(taulaOficines);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,32 +98,50 @@ public class LlistatOficinesView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void taulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taulaMouseClicked
-        Integer index = taula.getSelectedRow();
-        TableModel model = taula.getModel();
-                
-        String idUsuari = model.getValueAt(index, 0).toString();
+    private void taulaOficinesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taulaOficinesMouseClicked
+        Integer index = taulaOficines.getSelectedRow();
+        TableModel model = taulaOficines.getModel();
+        
+        String idOficina = model.getValueAt(index, 0).toString();
         String nom = model.getValueAt(index, 1).toString();
-        String email = model.getValueAt(index, 2).toString();
-        String rol = model.getValueAt(index, 3).toString();
-        String cif = model.getValueAt(index, 4).toString();
-        String direccio = model.getValueAt(index, 5).toString();
-        String poblacio = model.getValueAt(index, 6).toString();
-        String provincia = model.getValueAt(index, 7).toString();
-        String deshabilitat = model.getValueAt(index, 8).toString();
+        String tipus = model.getValueAt(index, 2).toString();
+        String capacitat = model.getValueAt(index, 3).toString();
+        String preu = model.getValueAt(index, 4).toString();
+        String serveis = model.getValueAt(index, 5).toString();
+        String direccio = model.getValueAt(index, 6).toString();
+        String poblacio = model.getValueAt(index, 7).toString();
+        String provincia = model.getValueAt(index, 8).toString();
+        String habilitada = model.getValueAt(index, 9).toString();
+        String eliminada = model.getValueAt(index, 10).toString();
+                
+        InformacioOficinaView informacioOficinaView = new InformacioOficinaView(codiAcces, idOficina);
         
-        InformacioUsuariView informacioUsuariView = new InformacioUsuariView(codiAcces, idUsuari);
-        informacioUsuariView.setVisible(true);
+        informacioOficinaView.inputNom.setText(nom);
+        informacioOficinaView.selectCategoria.setSelectedItem(tipus);
+        informacioOficinaView.inputCapacitat.setText(capacitat);
+        informacioOficinaView.inputPreu.setText(preu);
+        informacioOficinaView.txtAreaServeis.setText(serveis);
+        informacioOficinaView.inputDireccio.setText(direccio);
+        informacioOficinaView.inputPoblacio.setText(poblacio);
+        informacioOficinaView.inputProvincia.setText(provincia);
+        informacioOficinaView.chkHabilitat.setSelected(Boolean.parseBoolean(habilitada));
+        informacioOficinaView.chkEliminat.setSelected(Boolean.parseBoolean(eliminada));
         
-        informacioUsuariView.inputNom.setText(nom);
-        informacioUsuariView.inputEmail.setText(email);
-        informacioUsuariView.inputRol.setText(rol);
-        informacioUsuariView.inputCifEmpresa.setText(cif);
-        informacioUsuariView.inputDireccio.setText(direccio);
-        informacioUsuariView.inputPoblacio.setText(poblacio);
-        informacioUsuariView.inputProvincia.setText(provincia);
-        informacioUsuariView.chkDeshabilitat.setSelected(Boolean.parseBoolean(deshabilitat));        
-    }//GEN-LAST:event_taulaMouseClicked
+        Integer accioUsuari= new SimpleDialog().optionMessage("Editar o eliminar oficina?", "Editar", "Eliminar");
+        if (accioUsuari == EDITAR) {
+            new SimpleDialog().infoMessage("editar");
+            informacioOficinaView.setVisible(true);
+        } else if (accioUsuari == DESHABILITAR) {
+            if (Boolean.parseBoolean(eliminada)) {
+                new SimpleDialog().infoMessage("Oficina ja marcada com eliminada");
+            } else {
+                deshabilitarOficina(codiAcces, idOficina);
+                //DefaultTableModel tableModel = (DefaultTableModel) model;
+                //tableModel.fireTableCellUpdated(0, 10);
+                taulaOficines.revalidate();
+            }
+        }
+    }//GEN-LAST:event_taulaOficinesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -166,62 +185,81 @@ public class LlistatOficinesView extends javax.swing.JFrame {
         });
     }
     
-    private void carregarLlistatUsuaris(String codiAcces) {        
-        DTOUsuari usuari = new DTOUsuari();
+    private void carregarLlistatOficines(String codiAcces) {        
+        DTOOficina oficina = new DTOOficina();
         
         try {
-            JSONObject response = usuari.llistatUsuaris(codiAcces);
+            JSONObject response = oficina.llistatOficines(codiAcces);
             
             if (200 != response.getInt("code")) {
                 System.out.println(response.getString("message"));
                 JSONObject jsonResponse = new JSONObject(response.getString("message"));
                 new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
             } else {
-                
-                List<UsuariVO> llistatUsuaris = new ObjectMapper().readValue(
-                    response.getString("message"), 
-                    new TypeReference<List<UsuariVO>>() {}
-                );               
+                initComponents();
+                List<OficinaVO> llistatOficines = new ObjectMapper().readValue(
+                    response.getString("message"),
+                    new TypeReference<List<OficinaVO>>() {}
+                );
                 
                 DefaultTableModel model = new DefaultTableModel();
-        
+                
                 model.setColumnIdentifiers(new Object[]{
                     "Id",
                     "Nom",
-                    "Email",
-                    "Rol",
-                    "CIF Empresa",
+                    "Tipus",
+                    "Capacitat",
+                    "Preu",
+                    "Serveis",
                     "Direcció",
                     "Població",
                     "Provincia",
-                    "Deshabilitat",
-                    "Creat el",
-                    "Darrer accés"
+                    "Habilitada",
+                    "Eliminada"
                 });
                 
-                for (UsuariVO usuariInfo: llistatUsuaris) {
-                    System.out.println(String.valueOf(usuariInfo));
+                for (OficinaVO oficinaInfo: llistatOficines) {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    String modelData = objectMapper.writeValueAsString(oficinaInfo);
+                    System.out.println("oficina >> "+modelData);
                     model.addRow(new Object[]{
-                        usuariInfo.getIdUsuari(),
-                        usuariInfo.getNom(),
-                        usuariInfo.getEmail(),
-                        usuariInfo.getRol(),
-                        usuariInfo.getCifEmpresa(),
-                        usuariInfo.getDireccio(),
-                        usuariInfo.getPoblacio(),
-                        usuariInfo.getProvincia(),
-                        usuariInfo.getDeshabilitat(),
-                        usuariInfo.getDataCreacio(),
-                        usuariInfo.getUltimAcces(),
+                        oficinaInfo.getIdOficina(),
+                        oficinaInfo.getNom(),
+                        oficinaInfo.getTipus(),
+                        oficinaInfo.getCapacitat(),
+                        oficinaInfo.getPreu(),
+                        oficinaInfo.getServeis(),
+                        oficinaInfo.getDireccio(),
+                        oficinaInfo.getPoblacio(),
+                        oficinaInfo.getProvincia(),
+                        oficinaInfo.getHabilitada(),
+                        oficinaInfo.isEliminat(),
                     });
                 }
                 
-                taula.setModel(model);    
+                taulaOficines.setModel(model);
                 
-                taula.getColumnModel().removeColumn(taula.getColumnModel().getColumn(0));
-                
+                taulaOficines.getColumnModel().removeColumn(taulaOficines.getColumnModel().getColumn(0));
             }
             
+        } catch (IOException ex) {
+            Logger.getLogger(LlistatOficinesView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void deshabilitarOficina(String codiAcces, String idOficina) {
+        DTOOficina oficina = new DTOOficina();
+        
+        try {
+            JSONObject response = oficina.baixaOficina(codiAcces, idOficina);
+            
+            if (200 != response.getInt("code")) {
+                System.out.println(response.getString("message"));
+                JSONObject jsonResponse = new JSONObject(response.getString("message"));
+                new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
+            } else {
+               new SimpleDialog().infoMessage(response.getString("message")); 
+            }
         } catch (IOException ex) {
             Logger.getLogger(LlistatOficinesView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -231,6 +269,6 @@ public class LlistatOficinesView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable taula;
+    private javax.swing.JTable taulaOficines;
     // End of variables declaration//GEN-END:variables
 }

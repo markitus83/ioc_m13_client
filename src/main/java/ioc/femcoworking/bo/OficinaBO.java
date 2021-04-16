@@ -4,6 +4,7 @@ package ioc.femcoworking.bo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ioc.femcoworking.vo.CodiAccesVO;
 import ioc.femcoworking.vo.OficinaVO;
+import ioc.femcoworking.vo.PeticioAltaOficinaVO;
 import java.io.IOException;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -39,9 +40,9 @@ public class OficinaBO {
      * @return Response
      * @throws IOException 
      */
-    public Response altaNovaOficina(OficinaVO novaOficina) throws IOException {
+    public Response altaNovaOficina(PeticioAltaOficinaVO peticioAltaOficina) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String requestBody = objectMapper.writeValueAsString(novaOficina);
+        String requestBody = objectMapper.writeValueAsString(peticioAltaOficina);
         
         Request request = new Request.Builder()
             .url(URL_SERVIDOR + "/altaoficina")
@@ -63,18 +64,14 @@ public class OficinaBO {
      * @return Response
      * @throws IOException 
      */
-    public Response llistatOficines(CodiAccesVO codiAcces) throws IOException {
-        /*
+    public Response llistatOficines(String codiAcces) throws IOException {
         Request request = new Request.Builder()
-            .url(URL_SERVIDOR + "/oficines/" + codiAcces.getCodiAcces())
+            .url(URL_SERVIDOR + "/oficines/" + codiAcces)
             .header("Content-Type","application/json; charset=utf-8")
             .build();
         
         Response response = httpClient.newCall(request).execute();
         
-        return response;
-        */
-        Response response = null;
         return response;
     }
     
@@ -112,31 +109,27 @@ public class OficinaBO {
     }
     
     /**
-     * Deshabilitar oficina
+     * Eliminar oficina (sense esborrar registre, softdelete)
      * 
-     * Petició PUT al servidor
+     * Petició DELETE al servidor
      * 
      * @param codiAcces
      * @param idOficina
      * @return Response
      * @throws IOException 
      */
-    public Response deshabilitarOficina(CodiAccesVO codiAcces, String idOficina) throws IOException {
+    public Response baixaOficina(String codiAcces, String idOficina) throws IOException {
         JSONObject jsonBody = new JSONObject()
             .put("idOficina", idOficina);
         
-        /*
         Request request = new Request.Builder()
-            .url(URL_SERVIDOR + "/deshabilitarOficina/" + codiAcces.getCodiAcces())
+            .url(URL_SERVIDOR + "/baixaoficina/" + codiAcces + "/" + idOficina)
             .header("Content-Type","application/json; charset=utf-8")
-            .put(RequestBody.create(jsonBody.toString(), JSON))
+            .delete()
             .build();
         
         Response response = httpClient.newCall(request).execute();
         
-        return response;
-        */
-        Response response = null;
         return response;
     }
 }

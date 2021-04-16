@@ -1,15 +1,16 @@
 
 package ioc.femcoworking.view;
 
-import ioc.femcoworking.dto.DTOUsuari;
+import ioc.femcoworking.dto.DTOOficina;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
+import resources.Categoria;
 import resources.SimpleDialog;
 
 /**
- * GUI per mostrar l'informació d'una oficina en detall 
+ * GUI per gestionar el registre de nous usuaris en el sistema
  * 
  * @author Marc Ginovart Vega
  */
@@ -19,8 +20,8 @@ public class InformacioOficinaView extends javax.swing.JFrame {
     
     public InformacioOficinaView(String codi, String id) {
         codiAcces = codi;
-        idUsuari = id;         
-        initComponents();                
+        idUsuari = id;                   
+        initComponents();
     }
     
     public InformacioOficinaView() {
@@ -39,11 +40,9 @@ public class InformacioOficinaView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         inputNom = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        inputEmail = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        inputRol = new javax.swing.JTextField();
+        inputCapacitat = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        inputCifEmpresa = new javax.swing.JTextField();
+        inputPreu = new javax.swing.JTextField();
         inputDireccio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -51,40 +50,31 @@ public class InformacioOficinaView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         inputProvincia = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        chkDeshabilitat = new javax.swing.JCheckBox();
+        chkHabilitat = new javax.swing.JCheckBox();
         btnGuardar = new javax.swing.JButton();
+        inputContrasenya = new javax.swing.JLabel();
+        selectCategoria = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaServeis = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        chkEliminat = new javax.swing.JCheckBox();
 
         setTitle("FEM_Coworking");
 
         jLabel1.setText("Nom");
 
-        inputNom.setEnabled(false);
+        jLabel2.setText("Capacitat");
 
-        jLabel2.setText("Email");
-
-        inputEmail.setEnabled(false);
-
-        jLabel3.setText("Rol");
-
-        inputRol.setEnabled(false);
-
-        jLabel4.setText("CIF Empresa");
-
-        inputCifEmpresa.setEnabled(false);
-
-        inputDireccio.setEnabled(false);
+        jLabel4.setText("Preu");
 
         jLabel5.setText("Direcció");
 
         jLabel6.setText("Població");
 
-        inputPoblacio.setEnabled(false);
-
         jLabel7.setText("Provincia");
 
-        inputProvincia.setEnabled(false);
-
-        jLabel8.setText("Deshabilitat");
+        jLabel8.setText("Habilitada");
 
         btnGuardar.setText("Guardar canvis");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,49 +83,80 @@ public class InformacioOficinaView extends javax.swing.JFrame {
             }
         });
 
+        inputContrasenya.setText("Tipus");
+
+        selectCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OFICINA_PRIVADA", "SUITE_OFICINES", "ESCRIPTORI_DEDICAT" }));
+
+        jLabel9.setText("Serveis");
+
+        txtAreaServeis.setColumns(20);
+        txtAreaServeis.setRows(5);
+        jScrollPane1.setViewportView(txtAreaServeis);
+
+        jLabel10.setText("Eliminada");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(79, 79, 79)
-                                .addComponent(inputPoblacio, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(79, 79, 79)
-                                .addComponent(inputDireccio, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(79, 79, 79)
-                                .addComponent(inputCifEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(79, 79, 79)
-                                .addComponent(inputRol, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(79, 79, 79)
-                                .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(79, 79, 79)
-                                .addComponent(inputNom, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(201, 201, 201)
+                                .addComponent(inputCapacitat))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(79, 79, 79)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(chkDeshabilitat)
-                                    .addComponent(inputProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addGap(79, 79, 79)
+                                            .addComponent(inputPoblacio, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(79, 79, 79)
+                                            .addComponent(inputDireccio, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(79, 79, 79)
+                                            .addComponent(inputPreu, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addGap(79, 79, 79)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(chkHabilitat)
+                                                    .addComponent(inputProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel10)
+                                                .addGap(79, 79, 79)
+                                                .addComponent(chkEliminat)
+                                                .addGap(119, 119, 119))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(87, 87, 87)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(79, 79, 79)
+                                    .addComponent(inputNom, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(inputContrasenya)
+                                    .addGap(79, 79, 79)
+                                    .addComponent(selectCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel2)
+                            .addGap(226, 226, 226)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
+                        .addGap(137, 137, 137)
                         .addComponent(btnGuardar)))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
@@ -148,16 +169,16 @@ public class InformacioOficinaView extends javax.swing.JFrame {
                     .addComponent(inputNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                    .addComponent(inputContrasenya)
+                    .addComponent(selectCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(inputRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(inputCapacitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(inputCifEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputPreu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -173,24 +194,66 @@ public class InformacioOficinaView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(chkDeshabilitat))
+                    .addComponent(chkHabilitat))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(chkEliminat)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnGuardar)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        DTOUsuari usuari = new DTOUsuari();
-        
+        DTOOficina oficina = new DTOOficina();
+       
         try {
-            JSONObject response = usuari.canviarEstatUsuari(codiAcces, idUsuari);
+            Categoria categoria = null;
+            switch(selectCategoria.getSelectedItem().toString()) {
+                case "ESCRIPTORI_DEDICAT":
+                    categoria = Categoria.ESCRIPTORI_DEDICAT;
+                    break;
+                case "OFICINA_PRIVADA":
+                    categoria = Categoria.OFICINA_PRIVADA;
+                    break;
+                case "SUITE_OFICINES":
+                    categoria = Categoria.SUITE_OFICINES;
+                    break;
+            }
+            
+            String nom = inputNom.getText();
+            Integer capacitat = Integer.parseInt(inputCapacitat.getText());
+            Double preu = Double.parseDouble(inputPreu.getText());
+            String serveis = txtAreaServeis.getText();
+            String provincia = inputProvincia.getText();
+            String poblacio = inputPoblacio.getText();
+            String direccio = inputDireccio.getText();
+            Boolean deshabilitat = chkHabilitat.isSelected();
+            Boolean eliminat = chkHabilitat.isSelected();
+            
+            JSONObject response = oficina.altaOficina(
+                codiAcces,
+                nom,
+                categoria,
+                capacitat,
+                preu,
+                serveis,
+                provincia,
+                poblacio,
+                direccio,
+                deshabilitat,
+                eliminat
+            );
             
             if (200 != response.getInt("code")) {
-                JSONObject jsonResponse = new JSONObject(response.getString("message"));
-                new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
+                new SimpleDialog().errorMessage(response.getString("message"));
             } else {
                 new SimpleDialog().infoMessage(response.getString("message"));
                 this.dispose();
@@ -227,6 +290,12 @@ public class InformacioOficinaView extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -238,21 +307,26 @@ public class InformacioOficinaView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
-    public javax.swing.JCheckBox chkDeshabilitat;
-    public javax.swing.JTextField inputCifEmpresa;
+    public javax.swing.JCheckBox chkEliminat;
+    public javax.swing.JCheckBox chkHabilitat;
+    public javax.swing.JTextField inputCapacitat;
+    private javax.swing.JLabel inputContrasenya;
     public javax.swing.JTextField inputDireccio;
-    public javax.swing.JTextField inputEmail;
     public javax.swing.JTextField inputNom;
     public javax.swing.JTextField inputPoblacio;
+    public javax.swing.JTextField inputPreu;
     public javax.swing.JTextField inputProvincia;
-    public javax.swing.JTextField inputRol;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JComboBox<String> selectCategoria;
+    public javax.swing.JTextArea txtAreaServeis;
     // End of variables declaration//GEN-END:variables
 }

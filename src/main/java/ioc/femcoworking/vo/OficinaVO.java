@@ -1,26 +1,54 @@
 
 package ioc.femcoworking.vo;
 
-import resources.Oficina;
+import java.util.Date;
+import resources.Categoria;
 
 /**
- * Classe que representa el ValueObject de Oficina
+ * Classe que representa el ValueObject d'Oficina
  * 
  * @author Marc Ginovart Vega
  */
 public class OficinaVO {
     private String idOficina;
     private String nom;
-    private Oficina tipusOficina;
+    private Categoria tipus;
     private Integer capacitat;
-    private Float preu;
+    private Double preu;
     private String serveis;
     private Boolean habilitada;
-    private String direccio;
-    private String poblacio;
     private String provincia;
+    private String poblacio;
+    private String direccio;
+    private Date dataCreacio;
+    private Date dataUltimaEdicio;
+    private Boolean eliminat;
 
     public OficinaVO() {
+    }
+
+    public OficinaVO(
+        String nom,
+        Categoria categoria,
+        Integer capacitat,
+        Double preu,
+        String serveis,
+        String provincia,
+        String poblacio,
+        String direccio,
+        Boolean habilitada,
+        Boolean eliminat
+    ) {
+        this.nom = nom;
+        this.tipus = categoria;
+        this.capacitat = capacitat;
+        this.preu = preu;
+        this.serveis = serveis;
+        this.provincia = provincia;
+        this.poblacio = poblacio;
+        this.direccio = direccio;
+        this.habilitada = habilitada;
+        this.eliminat = eliminat;
     }
 
     public String getIdOficina() {
@@ -35,12 +63,12 @@ public class OficinaVO {
         this.nom = nom;
     }
 
-    public Oficina getTipusOficina() {
-        return tipusOficina;
+    public Categoria getTipus() {
+        return tipus;
     }
 
-    public void setTipusOficina(Oficina tipusOficina) {
-        this.tipusOficina = tipusOficina;
+    public void setTipus(Categoria tipusOficina) {
+        this.tipus = tipusOficina;
     }
 
     public Integer getCapacitat() {
@@ -51,11 +79,11 @@ public class OficinaVO {
         this.capacitat = capacitat;
     }
 
-    public Float getPreu() {
+    public Double getPreu() {
         return preu;
     }
 
-    public void setPreu(Float preu) {
+    public void setPreu(Double preu) {
         this.preu = preu;
     }
 
@@ -97,5 +125,29 @@ public class OficinaVO {
 
     public void setProvincia(String provincia) {
         this.provincia = provincia;
+    }
+
+    public Date getDataCreacio() {
+        return dataCreacio;
+    }
+
+    public void setDataCreacio(Date dataCreacio) {
+        this.dataCreacio = dataCreacio;
+    }
+
+    public Date getDataUltimaEdicio() {
+        return dataUltimaEdicio;
+    }
+
+    public void setDataUltimaEdicio(Date dataUltimaEdicio) {
+        this.dataUltimaEdicio = dataUltimaEdicio;
+    }
+
+    public Boolean isEliminat() {
+        return eliminat;
+    }
+
+    public void setEliminat(boolean eliminat) {
+        this.eliminat = eliminat;
     }
 }

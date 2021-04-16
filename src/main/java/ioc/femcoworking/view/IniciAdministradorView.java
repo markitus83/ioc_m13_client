@@ -171,7 +171,7 @@ public class IniciAdministradorView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarUsuariActionPerformed
 
     private void btnRegistrarOficinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarOficinaActionPerformed
-        // TODO add your handling code here:
+        new RegistrarOficinaView(codiAcces).setVisible(true);
     }//GEN-LAST:event_btnRegistrarOficinaActionPerformed
 
     private void btnLlistarOficinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLlistarOficinesActionPerformed

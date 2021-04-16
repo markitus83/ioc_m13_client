@@ -45,13 +45,13 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        taula = new javax.swing.JTable();
+        taulaUsuaris = new javax.swing.JTable();
 
         setTitle("FEM_Coworking");
 
         jLabel1.setText("Administrador / Llistat Usuaris");
 
-        taula.setModel(new javax.swing.table.DefaultTableModel(
+        taulaUsuaris.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,12 +62,12 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        taula.addMouseListener(new java.awt.event.MouseAdapter() {
+        taulaUsuaris.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                taulaMouseClicked(evt);
+                taulaUsuarisMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(taula);
+        jScrollPane1.setViewportView(taulaUsuaris);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,9 +98,9 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void taulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taulaMouseClicked
-        Integer index = taula.getSelectedRow();
-        TableModel model = taula.getModel();
+    private void taulaUsuarisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taulaUsuarisMouseClicked
+        Integer index = taulaUsuaris.getSelectedRow();
+        TableModel model = taulaUsuaris.getModel();
                 
         String idUsuari = model.getValueAt(index, 0).toString();
         String nom = model.getValueAt(index, 1).toString();
@@ -135,7 +135,7 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
         
         informacioUsuariView.setVisible(true);
         
-    }//GEN-LAST:event_taulaMouseClicked
+    }//GEN-LAST:event_taulaUsuarisMouseClicked
 
     /**
      * @param args the command line arguments
@@ -209,7 +209,9 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
                 });
                 
                 for (UsuariVO usuariInfo: llistatUsuaris) {
-                    System.out.println(String.valueOf(usuariInfo));
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    String modelData = objectMapper.writeValueAsString(usuariInfo);
+                    System.out.println("oficina >> "+modelData);
                     model.addRow(new Object[]{
                         usuariInfo.getIdUsuari(),
                         usuariInfo.getNom(),
@@ -225,9 +227,9 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
                     });
                 }
                 
-                taula.setModel(model);    
+                taulaUsuaris.setModel(model);
                 
-                taula.getColumnModel().removeColumn(taula.getColumnModel().getColumn(0));
+                taulaUsuaris.getColumnModel().removeColumn(taulaUsuaris.getColumnModel().getColumn(0));
                 
             }
             
@@ -262,6 +264,6 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable taula;
+    private javax.swing.JTable taulaUsuaris;
     // End of variables declaration//GEN-END:variables
 }

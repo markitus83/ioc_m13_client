@@ -1,12 +1,12 @@
 
 package ioc.femcoworking.view;
 
-import ioc.femcoworking.dto.DTOUsuari;
+import ioc.femcoworking.dto.DTOOficina;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
-import resources.Rol;
+import resources.Categoria;
 import resources.SimpleDialog;
 
 /**
@@ -15,6 +15,12 @@ import resources.SimpleDialog;
  * @author Marc Ginovart Vega
  */
 public class RegistrarOficinaView extends javax.swing.JFrame {
+    private static String codiAcces;
+    
+    public RegistrarOficinaView(String codi) {
+        codiAcces = codi;
+        initComponents();
+    }
     
     public RegistrarOficinaView() {
         initComponents();
@@ -46,10 +52,12 @@ public class RegistrarOficinaView extends javax.swing.JFrame {
         chkHabilitat = new javax.swing.JCheckBox();
         btnGuardar = new javax.swing.JButton();
         inputContrasenya = new javax.swing.JLabel();
-        selectTipus = new javax.swing.JComboBox<>();
+        selectCategoria = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaServeis = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        chkEliminat = new javax.swing.JCheckBox();
 
         setTitle("FEM_Coworking");
 
@@ -76,7 +84,7 @@ public class RegistrarOficinaView extends javax.swing.JFrame {
 
         inputContrasenya.setText("Tipus");
 
-        selectTipus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OFICINA_PRIVADA", "SUITE_OFICINES", "ESCRIPTORI_DEDICAT" }));
 
         jLabel9.setText("Serveis");
 
@@ -84,21 +92,22 @@ public class RegistrarOficinaView extends javax.swing.JFrame {
         txtAreaServeis.setRows(5);
         jScrollPane1.setViewportView(txtAreaServeis);
 
+        jLabel10.setText("Eliminada");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(201, 201, 201)
-                                    .addComponent(inputCapacitat))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(201, 201, 201)
+                                .addComponent(inputCapacitat))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel6)
@@ -112,33 +121,42 @@ public class RegistrarOficinaView extends javax.swing.JFrame {
                                             .addComponent(jLabel4)
                                             .addGap(79, 79, 79)
                                             .addComponent(inputPreu, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
-                                            .addGap(79, 79, 79)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(chkHabilitat)
-                                                .addComponent(inputProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(87, 87, 87)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addGap(79, 79, 79)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(chkHabilitat)
+                                                    .addComponent(inputProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel10)
+                                                .addGap(79, 79, 79)
+                                                .addComponent(chkEliminat)
+                                                .addGap(119, 119, 119))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(79, 79, 79)
-                                        .addComponent(inputNom, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(inputContrasenya)
-                                        .addGap(79, 79, 79)
-                                        .addComponent(selectTipus, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)
-                                .addGap(226, 226, 226)))
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(87, 87, 87)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(79, 79, 79)
+                                    .addComponent(inputNom, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(inputContrasenya)
+                                    .addGap(79, 79, 79)
+                                    .addComponent(selectCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(137, 137, 137)
-                            .addComponent(btnGuardar))))
+                            .addContainerGap()
+                            .addComponent(jLabel2)
+                            .addGap(226, 226, 226)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(btnGuardar)))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -151,7 +169,7 @@ public class RegistrarOficinaView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputContrasenya)
-                    .addComponent(selectTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -176,42 +194,61 @@ public class RegistrarOficinaView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(chkHabilitat))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(chkEliminat)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnGuardar)
-                .addGap(31, 31, 31))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        DTOUsuari usuari = new DTOUsuari();
-        
+        DTOOficina oficina = new DTOOficina();
+       
         try {
-            String nom = inputNom.getText();
-            String contrasenya = inputContrasenya.getText();
-            String email = inputCapacitat.getText();
-            Rol rol = Rol.CLIENT;
-            String cif = inputPreu.getText();
-            String direccio = inputDireccio.getText();
-            String poblacio = inputPoblacio.getText();
-            String provincia = inputProvincia.getText();
-            Boolean deshabilitat = chkHabilitat.isSelected();
+            Categoria categoria = null;
+            switch(selectCategoria.getSelectedItem().toString()) {
+                case "ESCRIPTORI_DEDICAT":
+                    categoria = Categoria.ESCRIPTORI_DEDICAT;
+                    break;
+                case "OFICINA_PRIVADA":
+                    categoria = Categoria.OFICINA_PRIVADA;
+                    break;
+                case "SUITE_OFICINES":
+                    categoria = Categoria.SUITE_OFICINES;
+                    break;
+            }
             
-            JSONObject response = usuari.registrarNovaOficina(
+            String nom = inputNom.getText();
+            Integer capacitat = Integer.parseInt(inputCapacitat.getText());
+            Double preu = Double.parseDouble(inputPreu.getText());
+            String serveis = txtAreaServeis.getText();
+            String provincia = inputProvincia.getText();
+            String poblacio = inputPoblacio.getText();
+            String direccio = inputDireccio.getText();
+            Boolean deshabilitat = chkHabilitat.isSelected();
+            Boolean eliminat = chkHabilitat.isSelected();
+            
+            JSONObject response = oficina.altaOficina(
+                codiAcces,
                 nom,
-                contrasenya,
-                email,
-                rol,
-                cif,
-                direccio,
-                poblacio,
+                categoria,
+                capacitat,
+                preu,
+                serveis,
                 provincia,
-                deshabilitat
+                poblacio,
+                direccio,
+                deshabilitat,
+                eliminat
             );
             
             if (200 != response.getInt("code")) {
@@ -266,6 +303,7 @@ public class RegistrarOficinaView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.ButtonGroup buttonGroupRol;
+    public javax.swing.JCheckBox chkEliminat;
     public javax.swing.JCheckBox chkHabilitat;
     public javax.swing.JTextField inputCapacitat;
     private javax.swing.JLabel inputContrasenya;
@@ -275,6 +313,7 @@ public class RegistrarOficinaView extends javax.swing.JFrame {
     public javax.swing.JTextField inputPreu;
     public javax.swing.JTextField inputProvincia;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -283,7 +322,7 @@ public class RegistrarOficinaView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> selectTipus;
+    private javax.swing.JComboBox<String> selectCategoria;
     private javax.swing.JTextArea txtAreaServeis;
     // End of variables declaration//GEN-END:variables
 }
