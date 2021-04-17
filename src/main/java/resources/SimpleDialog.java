@@ -58,4 +58,14 @@ public class SimpleDialog {
             options[0]
         );
     }
+    
+    public int confirmDialog(String missatge, String option0, String option1) {
+        return JOptionPane.showConfirmDialog(
+            null, 
+            missatge, 
+            "FEM Coworking", 
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE
+        );
+    }
 }

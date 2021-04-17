@@ -52,117 +52,24 @@ public class DTOReserva {
     }
     
     /**
-     * Canviar estat d'usuari
+     * Eliminar reserva
      * 
-     * @param codi
+     * @param codiAcces
      * @param idUsuari
      * @return JSONObject
      * @throws IOException 
      */
-    public JSONObject canviarEstatUsuari(String codi, String idUsuari) throws IOException {
-        UsuariBO usuari = new UsuariBO();
-        codiAcces = new CodiAccesVO(codi);
+    public JSONObject eliminarReserva(String codiAcces, String idUsuari) throws IOException {
+        ReservaBO reserva = new ReservaBO();
         
-        Response response = usuari.canviarEstatUsuari(codiAcces, idUsuari);
-        
-        String responseBody = response.body().string();
-        
-        HashMap<String, Object> jsonResponse = new HashMap<>();
-        jsonResponse.put("code", response.code());
-        
-        if (400 == response.code()) {
-            JSONObject errorMessage = new JSONObject(responseBody);
-            jsonResponse.put("message", errorMessage.get("message"));
-        } else {            
-            jsonResponse.put("message", responseBody);
-        }
-        
-        return new JSONObject(jsonResponse);
-    }
-    
-    /**
-     * Registrar nou usuari
-     * 
-     * @param nom
-     * @param contrasenya
-     * @param email
-     * @param rol
-     * @param cif
-     * @param direccio
-     * @param poblacio
-     * @param provincia
-     * @param deshabilitat
-     * @return
-     * @throws IOException 
-     */
-    public JSONObject registrarNouUsuari(
-        String nom,
-        String contrasenya,
-        String email,
-        Rol rol,
-        String cif,
-        String direccio,
-        String poblacio,
-        String provincia,
-        Boolean deshabilitat
-    ) throws IOException {
-        UsuariBO usuari = new UsuariBO();        
-        UsuariVO nouUsuari = new UsuariVO(
-            email, 
-            contrasenya, 
-            rol, 
-            nom, 
-            cif, 
-            direccio, 
-            poblacio, 
-            provincia, 
-            deshabilitat
-        );
-    
-        Response response = usuari.registrarNouUsuari(nouUsuari);
+        Response response = reserva.eliminarReserva(codiAcces, idUsuari);
         
         String responseBody = response.body().string();
         
         HashMap<String, Object> jsonResponse = new HashMap<>();
         jsonResponse.put("code", response.code());
         
-        if (400 == response.code()) {
-            JSONObject errorMessage = new JSONObject(responseBody);
-            jsonResponse.put("message", errorMessage.get("message"));
-        } else {            
-            jsonResponse.put("message", responseBody);
-        }
-        
-        return new JSONObject(jsonResponse);
-    }
-    
-    public JSONObject editarUsuari(
-        String codi, 
-        String nom,
-        String cif,
-        String direccio,
-        String poblacio,
-        String provincia
-    ) throws IOException {
-        UsuariBO usuari = new UsuariBO();
-        codiAcces = new CodiAccesVO(codi);
-        
-        PeticioEdicioUsuariVO editarUsuari = new PeticioEdicioUsuariVO(
-            nom, 
-    cif, 
-            direccio, 
-            poblacio, 
-            provincia
-        );
-        
-        Response response = usuari.editarUsuari(codiAcces, editarUsuari);
-        
-        String responseBody = response.body().string();
-        
-        HashMap<String, Object> jsonResponse = new HashMap<>();
-        jsonResponse.put("code", response.code());
-        
-        if (400 == response.code()) {
+        if (200 != response.code()) {
             JSONObject errorMessage = new JSONObject(responseBody);
             jsonResponse.put("message", errorMessage.get("message"));
         } else {            

@@ -24,6 +24,8 @@ import resources.SimpleDialog;
  */
 public class LlistatReservesView extends javax.swing.JFrame {
     private static String codiAcces;
+    private static final Integer SI_ELIMINAR = 0;
+    private static final Integer NO_ELIMINAR = 1;
     
     public LlistatReservesView(String codi) {
         codiAcces = codi;
@@ -47,13 +49,13 @@ public class LlistatReservesView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        taula = new javax.swing.JTable();
+        taulaReserves = new javax.swing.JTable();
 
         setTitle("FEM_Coworking");
 
         jLabel1.setText("Administrador / Llistat Oficines");
 
-        taula.setModel(new javax.swing.table.DefaultTableModel(
+        taulaReserves.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,12 +66,12 @@ public class LlistatReservesView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        taula.addMouseListener(new java.awt.event.MouseAdapter() {
+        taulaReserves.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                taulaMouseClicked(evt);
+                taulaReservesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(taula);
+        jScrollPane1.setViewportView(taulaReserves);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,32 +102,17 @@ public class LlistatReservesView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void taulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taulaMouseClicked
-        Integer index = taula.getSelectedRow();
-        TableModel model = taula.getModel();
+    private void taulaReservesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taulaReservesMouseClicked
+        Integer index = taulaReserves.getSelectedRow();
+        TableModel model = taulaReserves.getModel();
                 
-        String idUsuari = model.getValueAt(index, 0).toString();
-        String nom = model.getValueAt(index, 1).toString();
-        String email = model.getValueAt(index, 2).toString();
-        String rol = model.getValueAt(index, 3).toString();
-        String cif = model.getValueAt(index, 4).toString();
-        String direccio = model.getValueAt(index, 5).toString();
-        String poblacio = model.getValueAt(index, 6).toString();
-        String provincia = model.getValueAt(index, 7).toString();
-        String deshabilitat = model.getValueAt(index, 8).toString();
+        String idReserva = model.getValueAt(index, 0).toString();
         
-        InformacioUsuariView informacioUsuariView = new InformacioUsuariView(codiAcces, idUsuari);
-        informacioUsuariView.setVisible(true);
-        
-        informacioUsuariView.inputNom.setText(nom);
-        informacioUsuariView.inputEmail.setText(email);
-        informacioUsuariView.inputRol.setText(rol);
-        informacioUsuariView.inputCifEmpresa.setText(cif);
-        informacioUsuariView.inputDireccio.setText(direccio);
-        informacioUsuariView.inputPoblacio.setText(poblacio);
-        informacioUsuariView.inputProvincia.setText(provincia);
-        informacioUsuariView.chkDeshabilitat.setSelected(Boolean.parseBoolean(deshabilitat));        
-    }//GEN-LAST:event_taulaMouseClicked
+        Integer accioUsuari= new SimpleDialog().optionMessage("Eliminar reserva?", "Si", "No");
+        if (accioUsuari == SI_ELIMINAR) {
+            eliminarReserva(codiAcces, idReserva);
+        }
+    }//GEN-LAST:event_taulaReservesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -195,6 +182,7 @@ public class LlistatReservesView extends javax.swing.JFrame {
                 DefaultTableModel model = new DefaultTableModel();
         
                 model.setColumnIdentifiers(new Object[]{
+                    "IdReserva",
                     "Nom Oficina",
                     "Nom Usuari",
                     "Data inici",
@@ -207,6 +195,7 @@ public class LlistatReservesView extends javax.swing.JFrame {
                 for (ReservaVO reservaInfo: llistatReserva) {
                     System.out.println(String.valueOf(reservaInfo));
                     model.addRow(new Object[]{
+                        reservaInfo.getIdReserva(),
                         reservaInfo.getIdOficina().getNom(),
                         reservaInfo.getIdUsuari().getNom(),
                         simpleDateFormat.format(reservaInfo.getDataInici()),
@@ -214,11 +203,32 @@ public class LlistatReservesView extends javax.swing.JFrame {
                     });
                 }
                 
-                taula.setModel(model); 
+                taulaReserves.setModel(model); 
+                taulaReserves.getColumnModel().removeColumn(taulaReserves.getColumnModel().getColumn(0));
             }
             
         } catch (IOException ex) {
             Logger.getLogger(LlistatReservesView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void eliminarReserva(String codiAcces, String idReserva) {
+        DTOReserva reserva = new DTOReserva();
+        
+        try {
+            JSONObject response = reserva.eliminarReserva(codiAcces, idReserva);
+            
+            if (200 != response.getInt("code")) {
+                System.out.println(response.getString("message"));
+                JSONObject jsonResponse = new JSONObject(response.getString("message"));
+                new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
+            } else {
+                new SimpleDialog().infoMessage(response.getString("message"));
+                taulaReserves.repaint();
+                carregarLlistatReserves(codiAcces);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LlistatOficinesView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -226,6 +236,6 @@ public class LlistatReservesView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable taula;
+    private javax.swing.JTable taulaReserves;
     // End of variables declaration//GEN-END:variables
 }
