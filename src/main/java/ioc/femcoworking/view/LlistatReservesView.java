@@ -3,9 +3,12 @@ package ioc.femcoworking.view;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ioc.femcoworking.dto.DTOReserva;
 import ioc.femcoworking.dto.DTOUsuari;
+import ioc.femcoworking.vo.ReservaVO;
 import ioc.femcoworking.vo.UsuariVO;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -25,7 +28,7 @@ public class LlistatReservesView extends javax.swing.JFrame {
     public LlistatReservesView(String codi) {
         codiAcces = codi;
         initComponents();        
-        carregarLlistatUsuaris(codiAcces);
+        carregarLlistatReserves(codiAcces);
     }
     
     public LlistatReservesView() {
@@ -174,59 +177,44 @@ public class LlistatReservesView extends javax.swing.JFrame {
         });
     }
     
-    private void carregarLlistatUsuaris(String codiAcces) {        
-        DTOUsuari usuari = new DTOUsuari();
+    private void carregarLlistatReserves(String codiAcces) {  
+        DTOReserva reserva = new DTOReserva();
         
         try {
-            JSONObject response = usuari.llistatUsuaris(codiAcces);
+            JSONObject response = reserva.llistatReserves(codiAcces);
             
             if (200 != response.getInt("code")) {
                 System.out.println(response.getString("message"));
                 new SimpleDialog().errorMessage(response.getString("message"));
             } else {
-                
-                List<UsuariVO> llistatUsuaris = new ObjectMapper().readValue(
+                List<ReservaVO> llistatReserva = new ObjectMapper().readValue(
                     response.getString("message"), 
-                    new TypeReference<List<UsuariVO>>() {}
-                );               
+                    new TypeReference<List<ReservaVO>>() {}
+                );
                 
                 DefaultTableModel model = new DefaultTableModel();
         
                 model.setColumnIdentifiers(new Object[]{
-                    "Id",
-                    "Nom",
-                    "Email",
-                    "Rol",
-                    "CIF Empresa",
-                    "Direcció",
-                    "Població",
-                    "Provincia",
-                    "Deshabilitat",
-                    "Creat el",
-                    "Darrer accés"
+                    "Nom Oficina",
+                    "Nom Usuari",
+                    "Data inici",
+                    "Data fi"
                 });
                 
-                for (UsuariVO usuariInfo: llistatUsuaris) {
-                    System.out.println(String.valueOf(usuariInfo));
+                String pattern = "dd-MM-yyyy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                
+                for (ReservaVO reservaInfo: llistatReserva) {
+                    System.out.println(String.valueOf(reservaInfo));
                     model.addRow(new Object[]{
-                        usuariInfo.getIdUsuari(),
-                        usuariInfo.getNom(),
-                        usuariInfo.getEmail(),
-                        usuariInfo.getRol(),
-                        usuariInfo.getCifEmpresa(),
-                        usuariInfo.getDireccio(),
-                        usuariInfo.getPoblacio(),
-                        usuariInfo.getProvincia(),
-                        usuariInfo.getDeshabilitat(),
-                        usuariInfo.getDataCreacio(),
-                        usuariInfo.getUltimAcces(),
+                        reservaInfo.getIdOficina().getNom(),
+                        reservaInfo.getIdUsuari().getNom(),
+                        simpleDateFormat.format(reservaInfo.getDataInici()),
+                        simpleDateFormat.format(reservaInfo.getDataFi()),
                     });
                 }
                 
-                taula.setModel(model);    
-                
-                taula.getColumnModel().removeColumn(taula.getColumnModel().getColumn(0));
-                
+                taula.setModel(model); 
             }
             
         } catch (IOException ex) {

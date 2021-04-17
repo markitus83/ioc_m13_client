@@ -1,6 +1,7 @@
 
 package ioc.femcoworking.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
@@ -10,56 +11,56 @@ import java.util.Date;
  */
 public class ReservaVO {
     private String idReserva;
-    private String idSala;
-    private String idUsuari;
-    private Date dataInici;
-    private Date dataFi;
+    private OficinaVO idOficina;
+    private UsuariVO idUsuari;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date dataIniciReserva;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date dataFiReserva;
 
     public ReservaVO() {
     }
 
-    public ReservaVO(String idSala, String idUsuari, Date dataInici, Date dataFi) {
-        this.idSala = idSala;
+    public ReservaVO(OficinaVO idOficina, UsuariVO idUsuari, Date dataInici, Date dataFi) {
+        this.idOficina = idOficina;
         this.idUsuari = idUsuari;
-        this.dataInici = dataInici;
-        this.dataFi = dataFi;
+        this.dataIniciReserva = dataInici;
+        this.dataFiReserva = dataFi;
     }
 
     public String getIdReserva() {
         return idReserva;
     }
 
-    public String getIdSala() {
-        return idSala;
+    public OficinaVO getIdOficina() {
+        return idOficina;
     }
 
-    public void setIdSala(String idSala) {
-        this.idSala = idSala;
+    public void setIdOficina(OficinaVO idOficina) {
+        this.idOficina = idOficina;
     }
 
-    public String getIdUsuari() {
+    public UsuariVO getIdUsuari() {
         return idUsuari;
     }
 
-    public void setIdUsuari(String idUsuari) {
+    public void setIdUsuari(UsuariVO idUsuari) {
         this.idUsuari = idUsuari;
     }
 
     public Date getDataInici() {
-        return dataInici;
+        return dataIniciReserva;
     }
 
     public void setDataInici(Date dataInici) {
-        this.dataInici = dataInici;
+        this.dataIniciReserva = dataInici;
     }
 
     public Date getDataFi() {
-        return dataFi;
+        return dataFiReserva;
     }
 
     public void setDataFi(Date dataFi) {
-        this.dataFi = dataFi;
+        this.dataFiReserva = dataFi;
     }
-    
-    
 }

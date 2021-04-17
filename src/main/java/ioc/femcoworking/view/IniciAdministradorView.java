@@ -42,6 +42,7 @@ public class IniciAdministradorView extends javax.swing.JFrame {
         btnTancarSessio = new javax.swing.JButton();
         btnRegistrarOficina = new javax.swing.JButton();
         btnLlistarOficines = new javax.swing.JButton();
+        btnLlistarReserves = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FEM_Coworking");
@@ -90,6 +91,13 @@ public class IniciAdministradorView extends javax.swing.JFrame {
             }
         });
 
+        btnLlistarReserves.setText("Veure llistat reserves");
+        btnLlistarReserves.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLlistarReservesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,12 +116,14 @@ public class IniciAdministradorView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnRegistrarOficina, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnLlistarOficines, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                                    .addComponent(btnLlistarOficines, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLlistarReserves, javax.swing.GroupLayout.PREFERRED_SIZE, 174, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnCanviarContrasenya)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnTancarSessio, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 161, Short.MAX_VALUE))))
+                        .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +135,8 @@ public class IniciAdministradorView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLlistarUsuaris)
-                    .addComponent(btnLlistarOficines))
+                    .addComponent(btnLlistarOficines)
+                    .addComponent(btnLlistarReserves))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarUsuari)
@@ -178,6 +189,10 @@ public class IniciAdministradorView extends javax.swing.JFrame {
         new LlistatOficinesView(codiAcces).setVisible(true);
     }//GEN-LAST:event_btnLlistarOficinesActionPerformed
 
+    private void btnLlistarReservesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLlistarReservesActionPerformed
+        new LlistatReservesView(codiAcces).setVisible(true);
+    }//GEN-LAST:event_btnLlistarReservesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -217,6 +232,7 @@ public class IniciAdministradorView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCanviarContrasenya;
     private javax.swing.JButton btnLlistarOficines;
+    private javax.swing.JButton btnLlistarReserves;
     private javax.swing.JButton btnLlistarUsuaris;
     private javax.swing.JButton btnRegistrarOficina;
     private javax.swing.JButton btnRegistrarUsuari;
