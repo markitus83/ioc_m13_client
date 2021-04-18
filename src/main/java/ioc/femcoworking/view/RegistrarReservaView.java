@@ -191,11 +191,7 @@ public class RegistrarReservaView extends javax.swing.JFrame {
             SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_PATTERN);            
             String inici = dateFormat.format(dataInici.getDate());
             String fi = dateFormat.format(dataFi.getDate());
-
-            new SimpleDialog().infoMessage("idOficina "+idOficina+
-                    "\ninici "+inici+" - fi "+fi+
-                    "\ncodiAcces "+codiAcces);            
-            
+                    
             JSONObject response = reserva.reservaOficina(
                 codiAcces, 
                 idOficina, 
