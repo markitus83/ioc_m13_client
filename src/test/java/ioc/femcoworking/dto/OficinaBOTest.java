@@ -83,7 +83,7 @@ public class OficinaBOTest {
             .put("eliminat", "null");
         
         JSONObject jsonBody = new JSONObject()
-            .put("codiAcces", UUID.randomUUID().toString())
+            .put("codiAcces", mockCodiAcces)
             .put("oficina", jsonOficina);
         
         Request request = new Request.Builder()
@@ -108,7 +108,7 @@ public class OficinaBOTest {
         server.enqueue(
             new MockResponse()
                 .setResponseCode(405)
-                .setBody("{\"message\":\"Aquesta funcionalitat requereix el rol d'administrador\"}")                
+                .setBody("{\"message\":\"Aquesta funcionalitat requereix el rol d'administrador\"}")
         );
         
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
@@ -365,5 +365,190 @@ public class OficinaBOTest {
         
         assertEquals(200, response.code());
         assertEquals("Oficina donada d'alta amb l'identificador " + mockIdOficina, response.body().string());        
+    }
+    
+    @Test
+    public void testLlistarOficinesAmbCodiAccesNoValid() throws IOException {
+        String mockCodiAcces = UUID.randomUUID().toString();
+        
+        HttpUrl baseUrl = server.url("/oficines/"+mockCodiAcces);
+        
+        server.enqueue(
+            new MockResponse()
+                .setResponseCode(400)
+                .setBody("{\"message\":\"Codi d'accés no vàlid >> "+mockCodiAcces+"\"}")                
+        );
+        
+        OkHttpClient httpClient = new OkHttpClient();
+        
+        Request request = new Request.Builder()
+            .url(baseUrl)
+            .header("Content-Type","application/json; charset=utf-8")
+            .get()
+            .build();
+        
+        Response response = httpClient.newCall(request).execute();
+        
+        JSONObject responseMessage = new JSONObject(response.body().string());
+        String message = responseMessage.getString("message");
+        
+        assertEquals(400, response.code());
+        assertEquals("Codi d'accés no vàlid >> "+mockCodiAcces, message);
+    }
+    
+    @Test
+    public void testLlistarOficinesAmbCodiAccesValid() throws IOException {
+        String mockCodiAcces = UUID.randomUUID().toString();
+        String mockLlistaOficines = "[{"
+            + "\"idOficina\":\"cfaabaec-c15d-482b-9205-eca8aaafa131\","
+            + "\"nom\":\"sala1\","
+            + "\"tipus\": \"OFICINA_PRIVADA\","
+            + "\"capacitat\": 2,"
+            + "\"preu\": 11.0,"
+            + "\"serveis\": \"wifi, cookies\","
+            + "\"habilitada\": \"true\","
+            + "\"provincia\": \"neverland\","
+            + "\"poblacio\": \"wonderworld\","
+            + "\"direccio\": \"sesam street\","
+            + "\"eliminat\": \"true\""
+        + "}]";
+        
+        HttpUrl baseUrl = server.url("/oficines/"+mockCodiAcces);
+        
+        server.enqueue(
+            new MockResponse()
+                .setResponseCode(200)
+                .setBody(mockLlistaOficines)                
+        );
+        
+        OkHttpClient httpClient = new OkHttpClient();
+        
+        Request request = new Request.Builder()
+            .url(baseUrl)
+            .header("Content-Type","application/json; charset=utf-8")
+            .get()
+            .build();
+        
+        Response response = httpClient.newCall(request).execute();
+        
+        assertEquals(200, response.code());
+        assertEquals(mockLlistaOficines, response.body().string());
+    }
+    
+    @Test
+    public void testBaixaOficinesAmbCodiAccesNoValid() throws IOException {
+        String mockCodiAcces = UUID.randomUUID().toString();
+        String mockIdOficina = UUID.randomUUID().toString();
+        
+        HttpUrl baseUrl = server.url("/baixaoficina/"+mockCodiAcces+"/"+mockIdOficina);
+        
+        server.enqueue(
+            new MockResponse()
+                .setResponseCode(400)
+                .setBody("{\"message\":\"Codi d'accés no vàlid >> "+mockCodiAcces+"\"}")                
+        );
+        
+        OkHttpClient httpClient = new OkHttpClient();
+        
+        Request request = new Request.Builder()
+            .url(baseUrl)
+            .header("Content-Type","application/json; charset=utf-8")
+            .delete()
+            .build();
+        
+        Response response = httpClient.newCall(request).execute();
+        
+        JSONObject responseMessage = new JSONObject(response.body().string());
+        String message = responseMessage.getString("message");
+        
+        assertEquals(400, response.code());
+        assertEquals("Codi d'accés no vàlid >> "+mockCodiAcces, message);
+    }
+    
+    @Test
+    public void testBaixaOficinesSenseIndicarIdOficina() throws IOException {
+        String mockCodiAcces = UUID.randomUUID().toString();
+        String mockIdOficina = null;
+        
+        HttpUrl baseUrl = server.url("/baixaoficina/"+mockCodiAcces+"/"+mockIdOficina);
+        
+        server.enqueue(
+            new MockResponse()
+                .setResponseCode(400)
+                .setBody("{\"message\":\"El camp id oficina és obligatori\"}")                
+        );
+        
+        OkHttpClient httpClient = new OkHttpClient();
+        
+        Request request = new Request.Builder()
+            .url(baseUrl)
+            .header("Content-Type","application/json; charset=utf-8")
+            .delete()
+            .build();
+        
+        Response response = httpClient.newCall(request).execute();
+        
+        JSONObject responseMessage = new JSONObject(response.body().string());
+        String message = responseMessage.getString("message");
+        
+        assertEquals(400, response.code());
+        assertEquals("El camp id oficina és obligatori", message);
+    }
+    
+    @Test
+    public void testBaixaOficinesSenseSerAdministrador() throws IOException {
+        String mockCodiAcces = UUID.randomUUID().toString();
+        String mockIdOficina = UUID.randomUUID().toString();
+        
+        HttpUrl baseUrl = server.url("/baixaoficina/"+mockCodiAcces+"/"+mockIdOficina);
+        
+        server.enqueue(
+            new MockResponse()
+                .setResponseCode(405)
+                .setBody("{\"message\":\"Aquesta funcionalitat requereix el rol d'administrador\"}")               
+        );
+        
+        OkHttpClient httpClient = new OkHttpClient();
+        
+        Request request = new Request.Builder()
+            .url(baseUrl)
+            .header("Content-Type","application/json; charset=utf-8")
+            .delete()
+            .build();
+        
+        Response response = httpClient.newCall(request).execute();
+        
+        JSONObject responseMessage = new JSONObject(response.body().string());
+        String message = responseMessage.getString("message");
+        
+        assertEquals(405, response.code());
+        assertEquals("Aquesta funcionalitat requereix el rol d'administrador", message);
+    }
+    
+    @Test
+    public void testBaixaOficinesCorrecte() throws IOException {
+        String mockCodiAcces = UUID.randomUUID().toString();
+        String mockIdOficina = UUID.randomUUID().toString();
+        
+        HttpUrl baseUrl = server.url("/baixaoficina/"+mockCodiAcces+"/"+mockIdOficina);
+        
+        server.enqueue(
+            new MockResponse()
+                .setResponseCode(200)
+                .setBody("Oficina donada de baixa")
+        );
+        
+        OkHttpClient httpClient = new OkHttpClient();
+        
+        Request request = new Request.Builder()
+            .url(baseUrl)
+            .header("Content-Type","application/json; charset=utf-8")
+            .delete()
+            .build();
+        
+        Response response = httpClient.newCall(request).execute();
+        
+        assertEquals(200, response.code());
+        assertEquals("Oficina donada de baixa", response.body().string());
     }
 }
