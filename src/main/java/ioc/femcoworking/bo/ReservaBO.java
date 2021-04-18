@@ -87,12 +87,11 @@ public class ReservaBO {
      * @throws IOException 
      */
     public Response eliminarReserva(String codiAcces, String idReserva) throws IOException {
-        JSONObject jsonBody = new JSONObject().put("idReserva", idReserva);
-        
+                
         Request request = new Request.Builder()
-            .url(URL_SERVIDOR + "/esborrarreserva/" + codiAcces)
+            .url(URL_SERVIDOR + "/esborrarreserva/" + codiAcces + "/" + idReserva)
             .header("Content-Type","application/json; charset=utf-8")
-            .delete(RequestBody.create(jsonBody.toString(), JSON))
+            .delete()
             .build();
         
         Response response = httpClient.newCall(request).execute();

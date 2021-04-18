@@ -96,14 +96,14 @@ public class DTOReserva {
      * Eliminar reserva
      * 
      * @param codiAcces
-     * @param idUsuari
+     * @param idReserva
      * @return JSONObject
      * @throws IOException 
      */
-    public JSONObject eliminarReserva(String codiAcces, String idUsuari) throws IOException {
+    public JSONObject eliminarReserva(String codiAcces, String idReserva) throws IOException {
         ReservaBO reserva = new ReservaBO();
         
-        Response response = reserva.eliminarReserva(codiAcces, idUsuari);
+        Response response = reserva.eliminarReserva(codiAcces, idReserva);
         
         String responseBody = response.body().string();
         

@@ -133,9 +133,7 @@ public class OficinaBO {
      * @throws IOException 
      */
     public Response baixaOficina(String codiAcces, String idOficina) throws IOException {
-        JSONObject jsonBody = new JSONObject()
-            .put("idOficina", idOficina);
-        
+                
         Request request = new Request.Builder()
             .url(URL_SERVIDOR + "/baixaoficina/" + codiAcces + "/" + idOficina)
             .header("Content-Type","application/json; charset=utf-8")
