@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="21" failures="0" name="ioc.femcoworking.dto.UsuariBOTest" time="2.394" errors="0" skipped="0">
+<testsuite tests="21" failures="0" name="ioc.femcoworking.dto.UsuariBOTest" time="1.327" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/jre/lib"/>
@@ -15,6 +15,7 @@
     <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
+    <property name="test" value="ioc.femcoworking.dto.UsuariBOTest"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="user.dir" value="/Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client"/>
     <property name="java.runtime.version" value="1.8.0_71-b15"/>
@@ -35,8 +36,8 @@
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="10.15.6"/>
-    <property name="library.jansi.path" value="/Applications/NetBeans/Apache NetBeans 12.0.app/Contents/Resources/NetBeans/netbeans/java/maven/lib/jansi-native"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="library.jansi.path" value="/Applications/NetBeans/Apache NetBeans 12.0.app/Contents/Resources/NetBeans/netbeans/java/maven/lib/jansi-native"/>
     <property name="user.home" value="/Users/marc"/>
     <property name="user.timezone" value="Europe/Madrid"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
@@ -47,7 +48,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=/Applications/NetBeans/Apache NetBeans 12.0.app/Contents/Resources/NetBeans/netbeans/java/maven-nblib/netbeans-eventspy.jar install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=ioc.femcoworking.dto.UsuariBOTest -Dmaven.ext.class.path=/Applications/NetBeans/Apache NetBeans 12.0.app/Contents/Resources/NetBeans/netbeans/java/maven-nblib/netbeans-eventspy.jar surefire:test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="es"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -65,25 +66,25 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testCanviContransenyaCorrecte" time="1.154"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testDeshabilitatUsuariSenseSerAdministrador" time="0.072"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testRegistreNouUsuariEmailJaExistent" time="0.947"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testDeshabilitatUsuariAmbIdUsuariErroni" time="0.016"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginNomesUsuari" time="0.017"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLogoutUsuari" time="0.012"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginSensePosarDades" time="0.008"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testRegistreNouUsuariCorrecte" time="0.008"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginUsuariCorrecteContrasenyaIncorrecta" time="0.008"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginUsuariInexistent" time="0.023"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginCorrecte" time="0.011"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginNomesContrasenya" time="0.015"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginUsuariDeshabilitat" time="0.008"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testRegistreNouUsuariSenseContrasenya" time="0.008"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testRegistreNouUsuariSenseEmail" time="0.012"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testCanviContransenyaBuida" time="0.017"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testDeshabilitatUsuariSenseIdUsuari" time="0.012"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLlistarUsuarisNoSentAdministrador" time="0.007"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testRegistreNouUsuariSenseRol" time="0.017"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLlistarUsuarisSentAdministrador" time="0.012"/>
-  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testDeshabilitatUsuariSenseSentAdministrador" time="0.01"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testCanviContransenyaCorrecte" time="0.751"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testDeshabilitatUsuariSenseSerAdministrador" time="0.037"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testRegistreNouUsuariEmailJaExistent" time="0.311"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testDeshabilitatUsuariAmbIdUsuariErroni" time="0.012"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginNomesUsuari" time="0.018"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLogoutUsuari" time="0.02"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginSensePosarDades" time="0.011"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testRegistreNouUsuariCorrecte" time="0.015"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginUsuariCorrecteContrasenyaIncorrecta" time="0.01"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginUsuariInexistent" time="0.037"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginCorrecte" time="0.006"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginNomesContrasenya" time="0.011"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLoginUsuariDeshabilitat" time="0.018"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testRegistreNouUsuariSenseContrasenya" time="0.006"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testRegistreNouUsuariSenseEmail" time="0.013"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testCanviContransenyaBuida" time="0.01"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testDeshabilitatUsuariSenseIdUsuari" time="0.008"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLlistarUsuarisNoSentAdministrador" time="0.006"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testRegistreNouUsuariSenseRol" time="0.009"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testLlistarUsuarisSentAdministrador" time="0.009"/>
+  <testcase classname="ioc.femcoworking.dto.UsuariBOTest" name="testDeshabilitatUsuariSenseSentAdministrador" time="0.009"/>
 </testsuite>
