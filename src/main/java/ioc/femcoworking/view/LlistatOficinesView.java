@@ -28,6 +28,7 @@ public class LlistatOficinesView extends javax.swing.JFrame {
     
     public LlistatOficinesView(String codi) {
         codiAcces = codi;
+        initComponents();
         carregarLlistatOficines(codiAcces);
     }
     
@@ -194,7 +195,6 @@ public class LlistatOficinesView extends javax.swing.JFrame {
                 JSONObject jsonResponse = new JSONObject(response.getString("message"));
                 new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
             } else {
-                initComponents();
                 List<OficinaVO> llistatOficines = new ObjectMapper().readValue(
                     response.getString("message"),
                     new TypeReference<List<OficinaVO>>() {}
@@ -258,7 +258,9 @@ public class LlistatOficinesView extends javax.swing.JFrame {
                 JSONObject jsonResponse = new JSONObject(response.getString("message"));
                 new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
             } else {
-               new SimpleDialog().infoMessage(response.getString("message")); 
+               new SimpleDialog().infoMessage(response.getString("message"));
+               taulaOficines.repaint();
+               carregarLlistatOficines(codiAcces);
             }
         } catch (IOException ex) {
             Logger.getLogger(LlistatOficinesView.class.getName()).log(Level.SEVERE, null, ex);

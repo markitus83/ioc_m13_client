@@ -25,7 +25,8 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
     private static final Integer DESHABILITAR_USUARI = 1;
     
     public LlistatUsuarisView(String codi) {
-        codiAcces = codi;       
+        codiAcces = codi;  
+        initComponents();
         carregarLlistatUsuaris(codiAcces);
     }
     
@@ -186,7 +187,6 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
                 JSONObject jsonResponse = new JSONObject(response.getString("message"));
                 new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
             } else {
-                initComponents();
                 List<UsuariVO> llistatUsuaris = new ObjectMapper().readValue(
                     response.getString("message"), 
                     new TypeReference<List<UsuariVO>>() {}

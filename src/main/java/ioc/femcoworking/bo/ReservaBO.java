@@ -1,10 +1,6 @@
 package ioc.femcoworking.bo;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import ioc.femcoworking.vo.CodiAccesVO;
-import ioc.femcoworking.vo.DadesAccesVO;
-import ioc.femcoworking.vo.PeticioEdicioUsuariVO;
-import ioc.femcoworking.vo.UsuariVO;
 import java.io.IOException;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -46,12 +42,47 @@ public class ReservaBO {
     }
     
     /**
+     * Crear la reserva d'una oficina per part d'un usuari
+     * 
+     * @param codiAcces
+     * @param idOficina
+     * @param dataInici
+     * @param dataFi
+     * @return
+     * @throws IOException 
+     */
+    public Response reservaOficina(
+        String codiAcces,
+        String idOficina,
+        String dataInici,
+        String dataFi
+    ) throws IOException {
+        JSONObject jsonBody = new JSONObject()
+            .put("codiAcces", codiAcces)
+            .put("idOficina", idOficina)
+            .put("dataIniciReserva", dataInici)
+            .put("dataFiReserva", dataFi);
+        
+        System.out.println(jsonBody.toString());
+        
+        Request request = new Request.Builder()
+            .url(URL_SERVIDOR + "/reservaoficina")
+            .header("Content-Type","application/json; charset=utf-8")
+            .post(RequestBody.create(jsonBody.toString(), JSON))
+            .build();
+        
+        Response response = httpClient.newCall(request).execute();
+        
+        return response;
+    }
+    
+    /**
      * Eliminar reserva
      * 
      * Petició DELETE al servidor
      * 
      * @param codiAcces
-     * @param idUsuari
+     * @param idReserva
      * @return Response
      * @throws IOException 
      */

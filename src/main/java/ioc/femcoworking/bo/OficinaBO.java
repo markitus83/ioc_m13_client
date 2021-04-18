@@ -2,8 +2,6 @@
 package ioc.femcoworking.bo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ioc.femcoworking.vo.CodiAccesVO;
-import ioc.femcoworking.vo.OficinaVO;
 import ioc.femcoworking.vo.OficinaVisualitzacioVO;
 import ioc.femcoworking.vo.PeticioAltaOficinaVO;
 import java.io.IOException;
@@ -68,7 +66,36 @@ public class OficinaBO {
         return response;
     }
     
-    
+    /**
+     * Obtenir un llistat de les oficines disponibles per a reserva
+     * 
+     * Petició POST al servidor
+     * 
+     * @param codiAcces
+     * @param dataInici
+     * @param dataFi
+     * @return Response
+     * @throws IOException 
+     */
+    public Response llistatOficinesDisponibles(
+        String codiAcces, 
+        String dataInici, 
+        String dataFi
+    ) throws IOException {
+        JSONObject jsonBody = new JSONObject()
+            .put("dataInici", dataInici)
+            .put("dataFi", dataFi);
+        
+        Request request = new Request.Builder()
+            .url(URL_SERVIDOR + "/oficinesdisponibles/" + codiAcces)
+            .header("Content-Type","application/json; charset=utf-8")
+            .post(RequestBody.create(jsonBody.toString(), JSON))
+            .build();
+        
+        Response response = httpClient.newCall(request).execute();
+        
+        return response;
+    }
     
     /**
      * Editar informació d'oficina

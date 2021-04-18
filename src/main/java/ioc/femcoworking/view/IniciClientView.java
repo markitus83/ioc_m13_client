@@ -37,6 +37,8 @@ public class IniciClientView extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnCanviarContrasenya = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        btnCrearReserva = new javax.swing.JButton();
+        btnLlistarReserves = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FEM_Coworking");
@@ -57,6 +59,20 @@ public class IniciClientView extends javax.swing.JFrame {
             }
         });
 
+        btnCrearReserva.setText("Crear reserva");
+        btnCrearReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearReservaActionPerformed(evt);
+            }
+        });
+
+        btnLlistarReserves.setText("Veure reserves");
+        btnLlistarReserves.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLlistarReservesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,16 +80,24 @@ public class IniciClientView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(jSeparator1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCanviarContrasenya)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 37, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnCanviarContrasenya)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 37, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(btnCrearReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLlistarReserves, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +106,11 @@ public class IniciClientView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrearReserva)
+                    .addComponent(btnLlistarReserves))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCanviarContrasenya)
                     .addComponent(btnLogout))
@@ -113,6 +141,14 @@ public class IniciClientView extends javax.swing.JFrame {
     private void btnCanviarContrasenyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanviarContrasenyaActionPerformed
         new CanviContransenyaView(codiAcces).setVisible(true);
     }//GEN-LAST:event_btnCanviarContrasenyaActionPerformed
+
+    private void btnLlistarReservesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLlistarReservesActionPerformed
+        new LlistatReservesView(codiAcces).setVisible(true);
+    }//GEN-LAST:event_btnLlistarReservesActionPerformed
+
+    private void btnCrearReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearReservaActionPerformed
+        new RegistrarReservaView(codiAcces).setVisible(true);
+    }//GEN-LAST:event_btnCrearReservaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +190,8 @@ public class IniciClientView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCanviarContrasenya;
+    private javax.swing.JButton btnCrearReserva;
+    private javax.swing.JButton btnLlistarReserves;
     private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;

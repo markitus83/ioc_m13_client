@@ -4,9 +4,7 @@ package ioc.femcoworking.view;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ioc.femcoworking.dto.DTOReserva;
-import ioc.femcoworking.dto.DTOUsuari;
 import ioc.femcoworking.vo.ReservaVO;
-import ioc.femcoworking.vo.UsuariVO;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -164,6 +162,11 @@ public class LlistatReservesView extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * Carregar de dades el llistat amb reserves
+     * 
+     * @param codiAcces 
+     */
     private void carregarLlistatReserves(String codiAcces) {  
         DTOReserva reserva = new DTOReserva();
         
@@ -212,6 +215,12 @@ public class LlistatReservesView extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Eliminar reserva
+     * 
+     * @param codiAcces
+     * @param idReserva 
+     */
     private void eliminarReserva(String codiAcces, String idReserva) {
         DTOReserva reserva = new DTOReserva();
         

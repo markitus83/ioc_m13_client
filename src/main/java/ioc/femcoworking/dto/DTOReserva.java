@@ -52,6 +52,47 @@ public class DTOReserva {
     }
     
     /**
+     * Crear la reserva d'una oficina per part d'un usuari
+     * 
+     * @param codiAcces
+     * @param idOficina
+     * @param dataInici
+     * @param dataFi
+     * @return
+     * @throws IOException 
+     */
+    public JSONObject reservaOficina(
+        String codiAcces,
+        String idOficina,
+        String dataInici,
+        String dataFi
+    ) throws IOException {
+        ReservaBO reserva = new ReservaBO();
+        
+        Response response = reserva.reservaOficina(
+            codiAcces, 
+            idOficina, 
+            dataInici, 
+            dataFi
+        );
+        
+        String responseBody = response.body().string();
+                System.out.println("response.code >> "+response.code());
+                System.out.println("responseBody >> "+responseBody);
+        HashMap<String, Object> jsonResponse = new HashMap<>();
+        jsonResponse.put("code", response.code());
+        
+        if (200 != response.code()) {
+            JSONObject errorMessage = new JSONObject(responseBody);
+            jsonResponse.put("message", errorMessage.get("message"));
+        } else {            
+            jsonResponse.put("message", responseBody);
+        }
+        
+        return new JSONObject(jsonResponse);
+    }
+    
+    /**
      * Eliminar reserva
      * 
      * @param codiAcces

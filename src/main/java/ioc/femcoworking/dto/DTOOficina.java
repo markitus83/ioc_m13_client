@@ -123,6 +123,39 @@ public class DTOOficina {
     }
     
     /**
+     * Obtenir llistat d'Oficines
+     * 
+     * @param codiAcces
+     * @param dataInici
+     * @param dataFi
+     * @return
+     * @throws IOException 
+     */
+    public JSONObject llistatOficinesDisponibles(
+        String codiAcces, 
+        String dataInici, 
+        String dataFi
+    ) throws IOException {
+        OficinaBO oficina = new OficinaBO();
+        
+        Response response = oficina.llistatOficinesDisponibles(codiAcces, dataInici, dataFi);
+        
+        String responseBody = response.body().string();
+                
+        HashMap<String, Object> jsonResponse = new HashMap<>();
+        jsonResponse.put("code", response.code());
+        
+        if (405 == response.code()) {
+            JSONObject errorMessage = new JSONObject(responseBody);
+            jsonResponse.put("message", errorMessage.get("message"));
+        } else {            
+            jsonResponse.put("message", responseBody);
+        }
+        
+        return new JSONObject(jsonResponse);
+    }
+    
+    /**
      * Donar de baixa una oficina
      * 
      * @param codiAcces

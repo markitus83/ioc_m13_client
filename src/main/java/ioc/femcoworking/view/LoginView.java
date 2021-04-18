@@ -124,7 +124,7 @@ public class LoginView extends javax.swing.JFrame {
                 if (rolAdmin.equalsIgnoreCase(rolUser)) {                    
                     new IniciAdministradorView(codiAcces).setVisible(true);
                 } else {
-                    new IniciClientView(response.getString("message")).setVisible(true);
+                    new IniciClientView(codiAcces).setVisible(true);
                 }
                 this.dispose();
             }

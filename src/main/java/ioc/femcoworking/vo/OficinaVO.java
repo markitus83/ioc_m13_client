@@ -150,4 +150,8 @@ public class OficinaVO {
     public void setEliminat(boolean eliminat) {
         this.eliminat = eliminat;
     }
+    
+    public String toString() {
+        return this.nom;
+    }
 }
