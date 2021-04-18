@@ -53,6 +53,55 @@ public class OficinaBOTest {
     }
     
     @Test
+    public void testAltaOficinaAmbCodiAccesNoValid() throws IOException {
+        HttpUrl baseUrl = server.url("/altaoficina");
+        
+        String mockCodiAcces = UUID.randomUUID().toString();
+        
+        server.enqueue(
+            new MockResponse()
+                .setResponseCode(400)
+                .setBody("{\"message\":\"Codi d'accés no vàlid >> "+mockCodiAcces+"\"}")                
+        );
+        
+        MediaType JSON = MediaType.get("application/json; charset=utf-8");
+        OkHttpClient httpClient = new OkHttpClient();
+        
+        JSONObject jsonOficina = new JSONObject()
+            .put("idOficina", "null")
+            .put("nom", "null")
+            .put("tipus", "null")
+            .put("capacitat", "null")
+            .put("preu", "null")
+            .put("serveis", "null")
+            .put("habilitada", "null")
+            .put("provincia", "null")
+            .put("poblacio", "null")
+            .put("direccio", "null")
+            .put("dataCreacio", "null")
+            .put("dataUltimaEdicio", "null")
+            .put("eliminat", "null");
+        
+        JSONObject jsonBody = new JSONObject()
+            .put("codiAcces", UUID.randomUUID().toString())
+            .put("oficina", jsonOficina);
+        
+        Request request = new Request.Builder()
+            .url(baseUrl)
+            .header("Content-Type","application/json; charset=utf-8")
+            .post(RequestBody.create(jsonBody.toString(), JSON))
+            .build();
+        
+        Response response = httpClient.newCall(request).execute();
+        
+        JSONObject responseMessage = new JSONObject(response.body().string());
+        String message = responseMessage.getString("message");
+        
+        assertEquals(400, response.code());
+        assertEquals("Codi d'accés no vàlid >> "+mockCodiAcces, message);
+    }
+    
+    @Test
     public void testAltaOficinaSenseSerAdministrador() throws IOException {
         HttpUrl baseUrl = server.url("/altaoficina");
         
