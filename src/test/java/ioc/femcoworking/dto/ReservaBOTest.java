@@ -359,7 +359,20 @@ public class ReservaBOTest {
                 "\"direccio\": \"street\"," +
                 "\"dataCreacio\": \"2021-04-15T09:22:51.699+00:00\"," +
                 "\"dataUltimaEdicio\": \"2021-04-16T14:39:11.762+00:00\"," +
-                "\"eliminat\": false" +
+                "\"eliminat\": false }" +
+                "\"idUsuari\": {" +
+                "\"idUsuari\": \"2ec13407-d5c5-4fcc-b618-08515b4a7f20\"," +
+                "\"email\": \"user1@email.com\"," +
+                "\"contrasenya\": \"$2a$10$TPXdTIiEw/Ixjt1ggY1rBOVKO7aPunATGDk/f0ryCIUzO4kCA07CO\"," +
+                "\"rol\": \"CLIENT\"," +
+                "\"nom\": \"User1\"," +
+                "\"cifEmpresa\": \"unCifUser1\"," +
+                "\"direccio\": \"unaDireccioUser1\"," +
+                "\"poblacio\": \"unaPoblacioUser1\"," +
+                "\"provincia\": \"unaProvinciaUser1\"," +
+                "\"dataCreacio\": \"2021-03-21T17:01:44.112+00:00\"," +
+                "\"ultimAcces\": \"2021-03-23T22:23:59.981+00:00\"," +
+                "\"deshabilitat\": false }" +
             "}]";
         
         HttpUrl baseUrl = server.url("/reserves/"+mockCodiAcces);      
