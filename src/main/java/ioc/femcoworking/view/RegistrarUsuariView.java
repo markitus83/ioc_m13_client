@@ -48,8 +48,8 @@ public class RegistrarUsuariView extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         radioAdministrador = new javax.swing.JRadioButton();
         radioClient = new javax.swing.JRadioButton();
-        inputContrasenya = new javax.swing.JLabel();
-        inputNom1 = new javax.swing.JTextField();
+        lblContrasenya = new javax.swing.JLabel();
+        inputContrasenya = new javax.swing.JTextField();
 
         setTitle("FEM_Coworking");
 
@@ -82,7 +82,7 @@ public class RegistrarUsuariView extends javax.swing.JFrame {
         buttonGroupRol.add(radioClient);
         radioClient.setText("Client");
 
-        inputContrasenya.setText("Contrasenya");
+        lblContrasenya.setText("Contrasenya");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,9 +92,9 @@ public class RegistrarUsuariView extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(inputContrasenya)
+                        .addComponent(lblContrasenya)
                         .addGap(79, 79, 79)
-                        .addComponent(inputNom1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputContrasenya, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -144,8 +144,8 @@ public class RegistrarUsuariView extends javax.swing.JFrame {
                     .addComponent(inputNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputContrasenya)
-                    .addComponent(inputNom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblContrasenya)
+                    .addComponent(inputContrasenya, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -265,11 +265,10 @@ public class RegistrarUsuariView extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupRol;
     public javax.swing.JCheckBox chkDeshabilitat;
     public javax.swing.JTextField inputCifEmpresa;
-    private javax.swing.JLabel inputContrasenya;
+    public javax.swing.JTextField inputContrasenya;
     public javax.swing.JTextField inputDireccio;
     public javax.swing.JTextField inputEmail;
     public javax.swing.JTextField inputNom;
-    public javax.swing.JTextField inputNom1;
     public javax.swing.JTextField inputPoblacio;
     public javax.swing.JTextField inputProvincia;
     private javax.swing.JLabel jLabel1;
@@ -280,6 +279,7 @@ public class RegistrarUsuariView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lblContrasenya;
     private javax.swing.JRadioButton radioAdministrador;
     private javax.swing.JRadioButton radioClient;
     // End of variables declaration//GEN-END:variables

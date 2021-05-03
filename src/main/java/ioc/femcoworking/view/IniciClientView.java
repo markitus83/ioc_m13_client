@@ -39,6 +39,7 @@ public class IniciClientView extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnCrearReserva = new javax.swing.JButton();
         btnLlistarReserves = new javax.swing.JButton();
+        btnLlistarFactures = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FEM_Coworking");
@@ -73,6 +74,13 @@ public class IniciClientView extends javax.swing.JFrame {
             }
         });
 
+        btnLlistarFactures.setText("Veure factures");
+        btnLlistarFactures.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLlistarFacturesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,13 +98,15 @@ public class IniciClientView extends javax.swing.JFrame {
                                         .addComponent(btnCanviarContrasenya)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 37, Short.MAX_VALUE)))
+                                .addGap(0, 44, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(btnCrearReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLlistarReserves, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLlistarFactures, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -109,7 +119,8 @@ public class IniciClientView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearReserva)
-                    .addComponent(btnLlistarReserves))
+                    .addComponent(btnLlistarReserves)
+                    .addComponent(btnLlistarFactures))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCanviarContrasenya)
@@ -149,6 +160,10 @@ public class IniciClientView extends javax.swing.JFrame {
     private void btnCrearReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearReservaActionPerformed
         new RegistrarReservaView(codiAcces).setVisible(true);
     }//GEN-LAST:event_btnCrearReservaActionPerformed
+
+    private void btnLlistarFacturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLlistarFacturesActionPerformed
+        new LlistatFacturesView(codiAcces).setVisible(true);
+    }//GEN-LAST:event_btnLlistarFacturesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +206,7 @@ public class IniciClientView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCanviarContrasenya;
     private javax.swing.JButton btnCrearReserva;
+    private javax.swing.JButton btnLlistarFactures;
     private javax.swing.JButton btnLlistarReserves;
     private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;

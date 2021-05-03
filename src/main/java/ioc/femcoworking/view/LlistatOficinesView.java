@@ -52,7 +52,7 @@ public class LlistatOficinesView extends javax.swing.JFrame {
 
         setTitle("FEM_Coworking");
 
-        jLabel1.setText("Administrador / Llistat Oficines");
+        jLabel1.setText("Llistat Oficines");
 
         taulaOficines.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

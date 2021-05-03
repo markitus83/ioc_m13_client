@@ -37,12 +37,14 @@
                                   <Component id="btnRegistrarUsuari" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="btnRegistrarOficina" min="-2" pref="171" max="-2" attributes="0"/>
                                   <Component id="btnLlistarOficines" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnLlistarReserves" pref="174" max="32767" attributes="0"/>
+                              <Component id="btnLlistarReserves" min="-2" pref="171" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnLlistarFactures" min="-2" pref="171" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnCanviarContrasenya" min="-2" max="-2" attributes="0"/>
@@ -50,7 +52,7 @@
                               <Component id="btnTancarSessio" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -68,6 +70,7 @@
                   <Component id="btnLlistarUsuaris" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLlistarOficines" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLlistarReserves" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLlistarFactures" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -146,6 +149,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLlistarReservesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnLlistarFactures">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Veure llistat factures"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLlistarFacturesActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

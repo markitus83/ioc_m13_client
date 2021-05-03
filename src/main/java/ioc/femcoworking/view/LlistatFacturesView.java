@@ -3,7 +3,9 @@ package ioc.femcoworking.view;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ioc.femcoworking.dto.DTOFactura;
 import ioc.femcoworking.dto.DTOReserva;
+import ioc.femcoworking.vo.FacturaVO;
 import ioc.femcoworking.vo.ReservaVO;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -20,18 +22,18 @@ import resources.SimpleDialog;
  * 
  * @author Marc Ginovart Vega
  */
-public class LlistatReservesView extends javax.swing.JFrame {
+public class LlistatFacturesView extends javax.swing.JFrame {
     private static String codiAcces;
     private static final Integer SI_ELIMINAR = 0;
     private static final Integer NO_ELIMINAR = 1;
     
-    public LlistatReservesView(String codi) {
+    public LlistatFacturesView(String codi) {
         codiAcces = codi;
         initComponents();        
-        carregarLlistatReserves(codiAcces);
+        carregarLlistatFactures(codiAcces);
     }
     
-    public LlistatReservesView() {
+    public LlistatFacturesView() {
         initComponents();
     }
 
@@ -47,13 +49,13 @@ public class LlistatReservesView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        taulaReserves = new javax.swing.JTable();
+        taulaFactures = new javax.swing.JTable();
 
         setTitle("FEM_Coworking");
 
-        jLabel1.setText("Llistat Reserves");
+        jLabel1.setText("Llistat Factures");
 
-        taulaReserves.setModel(new javax.swing.table.DefaultTableModel(
+        taulaFactures.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,12 +66,12 @@ public class LlistatReservesView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        taulaReserves.addMouseListener(new java.awt.event.MouseAdapter() {
+        taulaFactures.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                taulaReservesMouseClicked(evt);
+                taulaFacturesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(taulaReserves);
+        jScrollPane1.setViewportView(taulaFactures);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,17 +102,18 @@ public class LlistatReservesView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void taulaReservesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taulaReservesMouseClicked
-        Integer index = taulaReserves.getSelectedRow();
-        TableModel model = taulaReserves.getModel();
-                
-        String idReserva = model.getValueAt(index, 0).toString();
+    private void taulaFacturesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taulaFacturesMouseClicked
         
-        Integer accioUsuari= new SimpleDialog().optionMessage("Eliminar reserva?", "Si", "No");
+        Integer index = taulaFactures.getSelectedRow();
+        TableModel model = taulaFactures.getModel();
+                
+        String idFactura = model.getValueAt(index, 0).toString();
+        
+        Integer accioUsuari= new SimpleDialog().optionMessage("Eliminar factura?", "Si", "No");
         if (accioUsuari == SI_ELIMINAR) {
-            eliminarReserva(codiAcces, idReserva);
+            eliminarFactura(codiAcces, idFactura);
         }
-    }//GEN-LAST:event_taulaReservesMouseClicked
+    }//GEN-LAST:event_taulaFacturesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -129,14 +132,30 @@ public class LlistatReservesView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LlistatReservesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LlistatFacturesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LlistatReservesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LlistatFacturesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LlistatReservesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LlistatFacturesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LlistatReservesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LlistatFacturesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -157,75 +176,77 @@ public class LlistatReservesView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LlistatReservesView().setVisible(true);
+                new LlistatFacturesView().setVisible(true);
             }
         });
     }
     
     /**
-     * Carregar de dades el llistat amb reserves
+     * Carregar de dades el llistat amb factures
      * 
      * @param codiAcces 
      */
-    private void carregarLlistatReserves(String codiAcces) {  
-        DTOReserva reserva = new DTOReserva();
+    private void carregarLlistatFactures(String codiAcces) {  
+        DTOFactura factura = new DTOFactura();
         
         try {
-            JSONObject response = reserva.llistatReserves(codiAcces);
+            JSONObject response = factura.llistatFactures(codiAcces);
             
             if (200 != response.getInt("code")) {
                 System.out.println(response.getString("message"));
                 new SimpleDialog().errorMessage(response.getString("message"));
             } else {
-                List<ReservaVO> llistatReserva = new ObjectMapper().readValue(
+                List<FacturaVO> llistatFactura = new ObjectMapper().readValue(
                     response.getString("message"), 
-                    new TypeReference<List<ReservaVO>>() {}
+                    new TypeReference<List<FacturaVO>>() {}
                 );
                 
                 DefaultTableModel model = new DefaultTableModel();
         
                 model.setColumnIdentifiers(new Object[]{
-                    "IdReserva",
+                    "IdFactura",
                     "Nom Oficina",
                     "Nom Usuari",
-                    "Data inici",
-                    "Data fi"
+                    "SubTotal",
+                    "Impostos",
+                    "Total"
                 });
                 
                 String pattern = "dd-MM-yyyy";
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
                 
-                for (ReservaVO reservaInfo: llistatReserva) {
-                    System.out.println(String.valueOf(reservaInfo));
+                for (FacturaVO facturaInfo: llistatFactura) {
+                    //System.out.println(String.valueOf(facturaInfo));
                     model.addRow(new Object[]{
-                        reservaInfo.getIdReserva(),
-                        reservaInfo.getIdOficina().getNom(),
-                        reservaInfo.getIdUsuari().getNom(),
-                        simpleDateFormat.format(reservaInfo.getDataInici()),
-                        simpleDateFormat.format(reservaInfo.getDataFi()),
+                        facturaInfo.getIdFactura(),
+                        facturaInfo.getIdReserva().getIdOficina().getNom(),
+                        facturaInfo.getIdUsuari().getNom(),
+                        facturaInfo.getSubTotal(),
+                        facturaInfo.getImpostos(),
+                        facturaInfo.getTotal()
                     });
                 }
                 
-                taulaReserves.setModel(model); 
-                taulaReserves.getColumnModel().removeColumn(taulaReserves.getColumnModel().getColumn(0));
+                taulaFactures.setModel(model); 
+                //taulaFactures.getColumnModel().removeColumn(taulaFactures.getColumnModel().getColumn(0));
             }
             
         } catch (IOException ex) {
-            Logger.getLogger(LlistatReservesView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LlistatFacturesView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     /**
-     * Eliminar reserva
+     * Eliminar factura
      * 
      * @param codiAcces
      * @param idReserva 
      */
-    private void eliminarReserva(String codiAcces, String idReserva) {
-        DTOReserva reserva = new DTOReserva();
+    private void eliminarFactura(String codiAcces, String idReserva) {
+        DTOFactura factura = new DTOFactura();        
         
         try {
-            JSONObject response = reserva.eliminarReserva(codiAcces, idReserva);
+            JSONObject response = factura.eliminarFactura(codiAcces, idReserva);
             
             if (200 != response.getInt("code")) {
                 System.out.println(response.getString("message"));
@@ -233,8 +254,8 @@ public class LlistatReservesView extends javax.swing.JFrame {
                 new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
             } else {
                 new SimpleDialog().infoMessage(response.getString("message"));
-                taulaReserves.repaint();
-                carregarLlistatReserves(codiAcces);
+                taulaFactures.repaint();
+                carregarLlistatFactures(codiAcces);
             }
         } catch (IOException ex) {
             Logger.getLogger(LlistatOficinesView.class.getName()).log(Level.SEVERE, null, ex);
@@ -245,6 +266,6 @@ public class LlistatReservesView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable taulaReserves;
+    private javax.swing.JTable taulaFactures;
     // End of variables declaration//GEN-END:variables
 }

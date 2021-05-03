@@ -31,9 +31,9 @@
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="inputContrasenya" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblContrasenya" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                      <Component id="inputNom1" min="-2" pref="147" max="-2" attributes="0"/>
+                      <Component id="inputContrasenya" min="-2" pref="147" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="1" attributes="0">
@@ -101,8 +101,8 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblContrasenya" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="inputContrasenya" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputNom1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -253,12 +253,12 @@
         <Property name="text" type="java.lang.String" value="Client"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="inputContrasenya">
+    <Component class="javax.swing.JLabel" name="lblContrasenya">
       <Properties>
         <Property name="text" type="java.lang.String" value="Contrasenya"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputNom1">
+    <Component class="javax.swing.JTextField" name="inputContrasenya">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>

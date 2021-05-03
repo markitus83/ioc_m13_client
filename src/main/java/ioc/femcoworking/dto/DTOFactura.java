@@ -1,5 +1,6 @@
 package ioc.femcoworking.dto;
 
+import ioc.femcoworking.bo.FacturaBO;
 import ioc.femcoworking.bo.ReservaBO;
 import ioc.femcoworking.bo.UsuariBO;
 import ioc.femcoworking.vo.CodiAccesVO;
@@ -14,27 +15,27 @@ import resources.Rol;
 
 
 /**
- * Classe per gestionar totes les funcionalitat BusinessObject de reserves
+ * Classe per gestionar totes les funcionalitat BusinessObject de factures
  * 
  * @author Marc Ginovart Vega
  */
-public class DTOReserva {
+public class DTOFactura {
     private CodiAccesVO codiAcces;  
 
-    public DTOReserva() {
+    public DTOFactura() {
     }
 
     /**
-     * Obtenir llistat de reserves
+     * Obtenir llistat de factures
      * 
      * @param codi
      * @return JSONObject
      * @throws IOException 
      */
-    public JSONObject llistatReserves(String codi) throws IOException {
-        ReservaBO reserva = new ReservaBO();
+    public JSONObject llistatFactures(String codi) throws IOException {
+        FacturaBO factura = new FacturaBO();
         
-        Response response = reserva.llistatReserves(codi);
+        Response response = factura.llistatFactures(codi);
         
         String responseBody = response.body().string();
                 
@@ -52,32 +53,23 @@ public class DTOReserva {
     }
     
     /**
-     * Crear la reserva d'una oficina per part d'un usuari
+     * Crear la factura d'una reserva
      * 
      * @param codiAcces
-     * @param idOficina
-     * @param dataInici
-     * @param dataFi
+     * @param idReserva
      * @return
      * @throws IOException 
      */
-    public JSONObject reservaOficina(
+    public JSONObject crearFactura(
         String codiAcces,
-        String idOficina,
-        String dataInici,
-        String dataFi
+        String idReserva
     ) throws IOException {
-        ReservaBO reserva = new ReservaBO();
+        FacturaBO factura = new FacturaBO();
         
-        Response response = reserva.reservaOficina(
-            codiAcces, 
-            idOficina, 
-            dataInici, 
-            dataFi
-        );
+        Response response = factura.crearFactura(codiAcces, idReserva);
         
         String responseBody = response.body().string();
-        
+                
         HashMap<String, Object> jsonResponse = new HashMap<>();
         jsonResponse.put("code", response.code());
         
@@ -92,17 +84,17 @@ public class DTOReserva {
     }
     
     /**
-     * Eliminar reserva
+     * Eliminar factura
      * 
      * @param codiAcces
-     * @param idReserva
+     * @param idFactura
      * @return JSONObject
      * @throws IOException 
      */
-    public JSONObject eliminarReserva(String codiAcces, String idReserva) throws IOException {
-        ReservaBO reserva = new ReservaBO();
+    public JSONObject eliminarFactura(String codiAcces, String idFactura) throws IOException {
+        FacturaBO factura = new FacturaBO();
         
-        Response response = reserva.eliminarReserva(codiAcces, idReserva);
+        Response response = factura.eliminarFactura(codiAcces, idFactura);
         
         String responseBody = response.body().string();
         

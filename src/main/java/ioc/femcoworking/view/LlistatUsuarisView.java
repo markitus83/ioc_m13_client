@@ -50,7 +50,7 @@ public class LlistatUsuarisView extends javax.swing.JFrame {
 
         setTitle("FEM_Coworking");
 
-        jLabel1.setText("Administrador / Llistat Usuaris");
+        jLabel1.setText("Llistat Usuaris");
 
         taulaUsuaris.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

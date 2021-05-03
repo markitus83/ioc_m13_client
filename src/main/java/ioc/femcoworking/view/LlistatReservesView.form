@@ -54,7 +54,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Administrador / Llistat Oficines"/>
+        <Property name="text" type="java.lang.String" value="Llistat Reserves"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">

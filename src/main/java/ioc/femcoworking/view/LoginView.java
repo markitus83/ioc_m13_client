@@ -134,7 +134,14 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void lblRegistrarUsuariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarUsuariMouseClicked
-        new SimpleDialog().questionMessage("Registar nou usuari?");
+        Integer opcioUsuari =new SimpleDialog().optionMessage(
+        "Registrar nou usuari", 
+        "Registrar", 
+        "Cancel·lar"
+        );
+        if (0 == opcioUsuari) {
+            new RegistrarUsuariView().setVisible(true);
+        }
     }//GEN-LAST:event_lblRegistrarUsuariMouseClicked
 
     /**

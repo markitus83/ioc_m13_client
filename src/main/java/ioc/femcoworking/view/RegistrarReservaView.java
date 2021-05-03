@@ -3,6 +3,7 @@ package ioc.femcoworking.view;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ioc.femcoworking.dto.DTOFactura;
 import ioc.femcoworking.dto.DTOOficina;
 import ioc.femcoworking.dto.DTOReserva;
 import ioc.femcoworking.vo.OficinaVO;
@@ -200,8 +201,22 @@ public class RegistrarReservaView extends javax.swing.JFrame {
                         
             if (200 != response.getInt("code")) {
                 new SimpleDialog().errorMessage(response.getString("message"));
-            } else {
-                new SimpleDialog().infoMessage(response.getString("message"));
+            } else {                
+                JSONObject jsonResponse = new JSONObject(response.getString("message"));
+                
+                String idReserva = jsonResponse.get("idReserva").toString();
+                String idUsuari = jsonResponse.get("idUsuari").toString();
+                
+                String missatge = "Reserva efectuada amb l'identificador " + idReserva;
+                new SimpleDialog().infoMessage(missatge);
+                
+                DTOFactura factura = new DTOFactura();
+                JSONObject responseFactura = factura.crearFactura(codiAcces, idReserva);
+                
+                if (200 != responseFactura.getInt("code")) {
+                    new SimpleDialog().errorMessage(responseFactura.getString("message"));
+                }
+                
                 this.dispose();
             }
             

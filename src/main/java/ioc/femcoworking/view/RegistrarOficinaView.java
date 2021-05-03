@@ -235,7 +235,7 @@ public class RegistrarOficinaView extends javax.swing.JFrame {
             String poblacio = inputPoblacio.getText();
             String direccio = inputDireccio.getText();
             Boolean deshabilitat = chkHabilitat.isSelected();
-            Boolean eliminat = chkHabilitat.isSelected();
+            Boolean eliminat = chkEliminat.isSelected();
             
             JSONObject response = oficina.altaOficina(
                 codiAcces,

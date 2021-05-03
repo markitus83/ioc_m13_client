@@ -43,6 +43,7 @@ public class IniciAdministradorView extends javax.swing.JFrame {
         btnRegistrarOficina = new javax.swing.JButton();
         btnLlistarOficines = new javax.swing.JButton();
         btnLlistarReserves = new javax.swing.JButton();
+        btnLlistarFactures = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FEM_Coworking");
@@ -98,6 +99,13 @@ public class IniciAdministradorView extends javax.swing.JFrame {
             }
         });
 
+        btnLlistarFactures.setText("Veure llistat factures");
+        btnLlistarFactures.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLlistarFacturesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,16 +122,18 @@ public class IniciAdministradorView extends javax.swing.JFrame {
                                     .addComponent(btnLlistarUsuaris, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnRegistrarUsuari, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(btnRegistrarOficina, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnLlistarOficines, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLlistarReserves, javax.swing.GroupLayout.PREFERRED_SIZE, 174, Short.MAX_VALUE))
+                                .addComponent(btnLlistarReserves, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLlistarFactures, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnCanviarContrasenya)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnTancarSessio, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(43, 43, 43))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +146,8 @@ public class IniciAdministradorView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLlistarUsuaris)
                     .addComponent(btnLlistarOficines)
-                    .addComponent(btnLlistarReserves))
+                    .addComponent(btnLlistarReserves)
+                    .addComponent(btnLlistarFactures))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarUsuari)
@@ -193,6 +204,10 @@ public class IniciAdministradorView extends javax.swing.JFrame {
         new LlistatReservesView(codiAcces).setVisible(true);
     }//GEN-LAST:event_btnLlistarReservesActionPerformed
 
+    private void btnLlistarFacturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLlistarFacturesActionPerformed
+        new LlistatFacturesView(codiAcces).setVisible(true);
+    }//GEN-LAST:event_btnLlistarFacturesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,6 +246,7 @@ public class IniciAdministradorView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCanviarContrasenya;
+    private javax.swing.JButton btnLlistarFactures;
     private javax.swing.JButton btnLlistarOficines;
     private javax.swing.JButton btnLlistarReserves;
     private javax.swing.JButton btnLlistarUsuaris;
