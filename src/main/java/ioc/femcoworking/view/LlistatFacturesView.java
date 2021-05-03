@@ -250,8 +250,12 @@ public class LlistatFacturesView extends javax.swing.JFrame {
             
             if (200 != response.getInt("code")) {
                 System.out.println(response.getString("message"));
-                JSONObject jsonResponse = new JSONObject(response.getString("message"));
-                new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
+                if (405 != response.getInt("code")) {
+                    JSONObject jsonResponse = new JSONObject(response.getString("message"));
+                    new SimpleDialog().errorMessage(jsonResponse.get("message").toString());
+                } else {
+                    new SimpleDialog().errorMessage(response.getString("message"));
+                }
             } else {
                 new SimpleDialog().infoMessage(response.getString("message"));
                 taulaFactures.repaint();

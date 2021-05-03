@@ -11,14 +11,11 @@ import resources.Categoria;
  */
 public class FacturaVO {
     private String idFactura;
-    private String numeroFactura;
     private ReservaVO idReserva;
     private UsuariVO idUsuari;
     private Double subTotal;
     private Double impostos;
-    private Double total;
-    
-    private String numeroReserva;
+    private Double total;    
     private String nomUsuariReserva;
     private String nomOficina;
     private Categoria tipusOficina;
@@ -38,7 +35,6 @@ public class FacturaVO {
         this.subTotal = subTotal;
         this.impostos = impostos;
         this.total = total;
-        this.numeroReserva = numeroReserva;
         this.nomUsuariReserva = nomUsuariReserva;
         this.nomOficina = nomOficina;
         this.tipusOficina = tipusOficina;
@@ -48,8 +44,6 @@ public class FacturaVO {
         this.data_fi_reserva = data_fi_reserva;
         this.dataCreacio = dataCreacio;
     }
-
-    
 
     public String getIdFactura() {
         return idFactura;
@@ -93,16 +87,6 @@ public class FacturaVO {
 
     public void setTotal(Double total) {
         this.total = total;
-    }
-    
-    //----------
-
-    public String getNumeroReserva() {
-        return numeroReserva;
-    }
-
-    public void setNumeroReserva(String numeroReserva) {
-        this.numeroReserva = numeroReserva;
     }
 
     public String getNomUsuariReserva() {
@@ -168,6 +152,4 @@ public class FacturaVO {
     public void setDataCreacio(Date dataCreacio) {
         this.dataCreacio = dataCreacio;
     }
-    
-    
 }
