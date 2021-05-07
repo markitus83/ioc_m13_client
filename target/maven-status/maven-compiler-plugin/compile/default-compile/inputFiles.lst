@@ -1,3 +1,5 @@
+/Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/bo/FacturaBO.java
+/Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/LlistatFacturesView.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/IniciAdministradorView.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/LlistatOficinesView.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/resources/Rol.java
@@ -9,11 +11,13 @@
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/InformacioUsuariView.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/LlistatReservesView.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/vo/PeticioAltaOficinaVO.java
+/Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/dto/DTOFactura.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/vo/UsuariVO.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/LlistatUsuarisView.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/RegistrarOficinaView.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/vo/OficinaVisualitzacioVO.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/dto/DTOOficina.java
+/Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/vo/FacturaVO.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/dto/DTOUsuari.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/vo/DadesAccesVO.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/dto/DTOReserva.java
@@ -27,5 +31,6 @@
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/vo/ReservaVO.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/vo/PeticioEdicioUsuariVO.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/RegistrarUsuariView.java
+/Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/InformacioFacturaView.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/LoginView.java
 /Users/marc/MEGAsync/ioc/M13/maven_femcoworking_client/src/main/java/ioc/femcoworking/view/CanviContransenyaView.java

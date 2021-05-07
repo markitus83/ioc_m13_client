@@ -8,6 +8,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.json.JSONObject;
+import resources.TrustSelfSignedCertificatesOkHttp;
 
 /**
  * Classe que representa el BusinessObject de Factura
@@ -15,8 +16,8 @@ import org.json.JSONObject;
  * @author Marc Ginovart Vega
  */
 public class FacturaBO {
-    private static final String URL_SERVIDOR = "http://localhost:8080";
-    private static final OkHttpClient httpClient = new OkHttpClient();
+    private static final String URL_SERVIDOR = "https://localhost:8443";
+    private static final OkHttpClient httpClient = new TrustSelfSignedCertificatesOkHttp().getOkHttpClient();
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     
     private CodiAccesVO codiAcces;
