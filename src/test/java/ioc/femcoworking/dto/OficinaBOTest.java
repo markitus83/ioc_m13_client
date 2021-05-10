@@ -1,10 +1,6 @@
 
 package ioc.femcoworking.dto;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import static ioc.femcoworking.bo.OficinaBO.JSON;
-import ioc.femcoworking.vo.DadesAccesVO;
-import ioc.femcoworking.vo.UsuariVO;
 import java.io.IOException;
 import java.util.UUID;
 import okhttp3.HttpUrl;
@@ -22,7 +18,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import resources.Rol;
 
 /**
  * Tests per validar el comportament de les crides HTTP al servidor 
