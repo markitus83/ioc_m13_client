@@ -20,7 +20,12 @@ import resources.TrustSelfSignedCertificatesOkHttp;
  * @author Marc Ginovart Vega
  */
 public class UsuariBO {
-    private static final String URL_SERVIDOR = "https://localhost:8443";
+    // url del servidor en local sense xifrat de dades
+    //private static final String URL_SERVIDOR = "http://localhost:8080";
+    // url del servidor en local amb xifrat de dades
+    //private static final String URL_SERVIDOR = "https://localhost:8443";
+    // url del servidor instal·lat en AWS
+    private static final String URL_SERVIDOR = "https://52.72.245.187:8443";
     private static final OkHttpClient httpClient = new TrustSelfSignedCertificatesOkHttp().getOkHttpClient();
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private CodiAccesVO codiAcces;
